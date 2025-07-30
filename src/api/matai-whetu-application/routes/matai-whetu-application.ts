@@ -1,0 +1,7 @@
+/**
+ * matai-whetu-application router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::matai-whetu-application.matai-whetu-application');

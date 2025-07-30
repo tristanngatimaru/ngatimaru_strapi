@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_shared_links",
+  "info": {
+    "displayName": "Link",
+    "icon": "attachment"
+  },
+  "options": {},
+  "attributes": {
+    "href": {
+      "type": "string"
+    },
+    "TeReoLabel": {
+      "type": "string"
+    },
+    "EnglishLabel": {
+      "type": "string"
+    },
+    "IsExternal": {
+      "type": "boolean",
+      "default": false
+    },
+    "IsButtonLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "PRIMARY",
+        "SECONDARY"
+      ]
+    }
+  },
+  "config": {}
+}

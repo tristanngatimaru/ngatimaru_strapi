@@ -1,0 +1,81 @@
+{
+  "kind": "collectionType",
+  "collectionName": "matai_whetu_applications",
+  "info": {
+    "singularName": "matai-whetu-application",
+    "pluralName": "matai-whetu-applications",
+    "displayName": "Matai Whetu Application"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "FirstName": {
+      "type": "string"
+    },
+    "LastName": {
+      "type": "string"
+    },
+    "PhoneNumber": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "string"
+    },
+    "WhanauOrOrganisationName": {
+      "type": "string"
+    },
+    "DetailsOfWhanauOrOrganisation": {
+      "type": "text"
+    },
+    "PowhiriRequired": {
+      "type": "string"
+    },
+    "FirstNameResonsible": {
+      "type": "string"
+    },
+    "LastNameResponsible": {
+      "type": "string"
+    },
+    "PhoneResponsible": {
+      "type": "string"
+    },
+    "EmailResponsible": {
+      "type": "string"
+    },
+    "BookingPurpose": {
+      "type": "text"
+    },
+    "BookingFrom": {
+      "type": "date"
+    },
+    "BookingTo": {
+      "type": "date"
+    },
+    "FirstNameWharenui": {
+      "type": "string"
+    },
+    "LastNameWharenui": {
+      "type": "string"
+    },
+    "WharekaiFirstName": {
+      "type": "string"
+    },
+    "WharekaiLastName": {
+      "type": "string"
+    },
+    "AblutionFirstName": {
+      "type": "string"
+    },
+    "AblutionLastName": {
+      "type": "string"
+    },
+    "AgreedToAllAgreements": {
+      "type": "string"
+    },
+    "OpenedAndAgreedToTikangaInfoSheet": {
+      "type": "string"
+    }
+  }
+}

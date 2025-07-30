@@ -1,0 +1,191 @@
+{
+  "kind": "collectionType",
+  "collectionName": "register_applications",
+  "info": {
+    "singularName": "register-application",
+    "pluralName": "register-applications",
+    "displayName": "Register Application"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "PersonalSalutaion": {
+      "type": "enumeration",
+      "enum": [
+        "Master",
+        "Mr",
+        "Miss",
+        "Mrs",
+        "Ms",
+        "Mx"
+      ]
+    },
+    "PersonalGender": {
+      "type": "enumeration",
+      "enum": [
+        "Male",
+        "Female",
+        "Gender Diverse"
+      ]
+    },
+    "PersonalBirthDate": {
+      "type": "date"
+    },
+    "PersonalFirstName": {
+      "type": "string"
+    },
+    "PersonalLastName": {
+      "type": "string"
+    },
+    "PersonalMaidenName": {
+      "type": "string"
+    },
+    "PersonalAKA": {
+      "type": "string"
+    },
+    "PersonalOccupation": {
+      "type": "string"
+    },
+    "PersonalSpouce": {
+      "type": "boolean"
+    },
+    "PersonalContactDetails": {
+      "type": "text"
+    },
+    "PersonalPostalAddress": {
+      "type": "text",
+      "default": "Same As Street Address"
+    },
+    "PersonalHomePhone": {
+      "type": "string"
+    },
+    "PersonalWorkPhone": {
+      "type": "string"
+    },
+    "PersonalMobilePhone": {
+      "type": "string"
+    },
+    "PersonalEmail": {
+      "type": "email"
+    },
+    "PrincipleHapu": {
+      "type": "enumeration",
+      "enum": [
+        "Te Ahumua",
+        "Ngati Te Aute",
+        "Ngati Kuriuaua",
+        "Te uringahau",
+        "Ngati Rautao",
+        "Ngati Hikairo",
+        "Ngati Wawenga",
+        "Ngati Kotinga",
+        "Ngati Whanga",
+        "Ngati Pu",
+        "Ngati Hauauru",
+        "Ngati Ua",
+        "Ngati Naunau",
+        "Ngati Pakira",
+        "Ngati Hape",
+        "Ngati Tumoana",
+        "Ngati Matau",
+        "Te Matahau",
+        "Ngati Tahae"
+      ]
+    },
+    "PrincipleOtherIwiAffiliation": {
+      "type": "string"
+    },
+    "PrincipleMarae": {
+      "type": "string"
+    },
+    "OtherHapu": {
+      "type": "enumeration",
+      "enum": [
+        "Te Ahumua",
+        "Ngati Te Aute",
+        "Ngati Kuriuaua",
+        "Te uringahau",
+        "Ngati Rautao",
+        "Ngati Hikairo",
+        "Ngati Wawenga",
+        "Ngati Kotinga",
+        "Ngati Whanga",
+        "Ngati Pu",
+        "Ngati Hauauru",
+        "Ngati Ua",
+        "Ngati Naunau",
+        "Ngati Pakira",
+        "Ngati Hape",
+        "Ngati Tumoana",
+        "Ngati Matau",
+        "Te Matahau",
+        "Ngati Tahae"
+      ]
+    },
+    "OtherIwiAffiliation": {
+      "type": "string"
+    },
+    "OtherMarae": {
+      "type": "string"
+    },
+    "DecendantAffiliation": {
+      "type": "enumeration",
+      "enum": [
+        "Ngati Maru Descendant",
+        "Whanga of Ngati Maru Descendant",
+        "Partner of Ngati Maru Descendant",
+        "Descendant of the whangai of Ngati Maru Descendant"
+      ]
+    },
+    "FatherGreatGrandFatherMen": {
+      "type": "string"
+    },
+    "FatherGreatGrandMotherMen": {
+      "type": "string"
+    },
+    "FatherGrandFather": {
+      "type": "string"
+    },
+    "Father": {
+      "type": "string"
+    },
+    "FatherGreatGrandFatherWomen": {
+      "type": "string"
+    },
+    "FatherGreatGrandMotherWomen": {
+      "type": "string"
+    },
+    "FatherGrandMother": {
+      "type": "string"
+    },
+    "MotherGreatGrandFatherMen": {
+      "type": "string"
+    },
+    "MotherGreatGrandMotherMen": {
+      "type": "string"
+    },
+    "MotherGrandFather": {
+      "type": "string"
+    },
+    "MotherGreatGrandFatherWomen": {
+      "type": "string"
+    },
+    "MotherGreatGrandMotherWomen": {
+      "type": "string"
+    },
+    "MotherGrandMother": {
+      "type": "string"
+    },
+    "Mother": {
+      "type": "string"
+    },
+    "AdditionalInformation": {
+      "type": "text"
+    },
+    "AgreeToTerms": {
+      "type": "boolean"
+    }
+  }
+}

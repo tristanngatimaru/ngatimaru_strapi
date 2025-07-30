@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fishing_permit_applications",
+  "info": {
+    "singularName": "fishing-permit-application",
+    "pluralName": "fishing-permit-applications",
+    "displayName": "Fishing Permit Application"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ApplyingUnderMaoriRights": {
+      "type": "boolean"
+    },
+    "IwiClaim": {
+      "type": "string"
+    },
+    "FirstName": {
+      "type": "string"
+    },
+    "LastName": {
+      "type": "string"
+    },
+    "EmailAddress": {
+      "type": "email"
+    },
+    "PhoneNumber": {
+      "type": "string"
+    },
+    "StreetAddress": {
+      "type": "text"
+    },
+    "PurposeForFishing": {
+      "type": "boolean"
+    },
+    "NumberAttending": {
+      "type": "string"
+    },
+    "ToBeUsedAt": {
+      "type": "string"
+    },
+    "ToBeUsedWhen": {
+      "type": "date"
+    },
+    "VenueContactNumber": {
+      "type": "string"
+    },
+    "SpeciesAndHarvest": {
+      "type": "component",
+      "component": "species.species",
+      "repeatable": true
+    }
+  }
+}
