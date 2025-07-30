@@ -16,6 +16,11 @@
     },
     "Description": {
       "type": "text"
+    },
+    "PageHeaders": {
+      "type": "component",
+      "component": "layout.hero-header",
+      "repeatable": true
     }
   }
 }

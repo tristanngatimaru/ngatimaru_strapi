@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_layout_navigations",
+  "info": {
+    "displayName": "Navigation",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "headers": {
+      "type": "component",
+      "component": "layout.header",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
