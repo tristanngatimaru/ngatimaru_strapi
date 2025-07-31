@@ -39,18 +39,8 @@ export interface SharedHeader extends Struct.ComponentSchema {
   attributes: {
     EnglishLabel: Schema.Attribute.String;
     HeaderImage: Schema.Attribute.Media<'files' | 'videos' | 'images'>;
-    Page: Schema.Attribute.Enumeration<
-      [
-        'Home',
-        'About',
-        'Book Matai Whetu',
-        'Fishing Permit',
-        'Documents',
-        'Register',
-        'Store',
-      ]
-    >;
     TeReoLabel: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
   };
 }
 
