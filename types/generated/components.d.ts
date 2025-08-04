@@ -16,7 +16,11 @@ export interface LayoutHeroHeader extends Struct.ComponentSchema {
     displayName: 'HeroHeader';
   };
   attributes: {
-    Header: Schema.Attribute.Component<'shared.header', false>;
+    BackgroundHeaderImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos'
+    >;
+    EnglishTitle: Schema.Attribute.String;
+    TeReoTitle: Schema.Attribute.String;
   };
 }
 
@@ -31,16 +35,16 @@ export interface LayoutNavigation extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedHeader extends Struct.ComponentSchema {
-  collectionName: 'components_shared_headers';
+export interface SharedDefaultSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_default_seos';
   info: {
-    displayName: 'Header';
+    displayName: 'defaultSEO';
+    icon: 'link';
   };
   attributes: {
-    EnglishLabel: Schema.Attribute.String;
-    HeaderImage: Schema.Attribute.Media<'files' | 'videos' | 'images'>;
-    TeReoLabel: Schema.Attribute.String;
-    Title: Schema.Attribute.String;
+    metaDescription: Schema.Attribute.Text;
+    metaImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    metaTitle: Schema.Attribute.String;
   };
 }
 
@@ -96,7 +100,7 @@ declare module '@strapi/strapi' {
       'layout.header': LayoutHeader;
       'layout.hero-header': LayoutHeroHeader;
       'layout.navigation': LayoutNavigation;
-      'shared.header': SharedHeader;
+      'shared.default-seo': SharedDefaultSeo;
       'shared.link': SharedLink;
       'shared.logo': SharedLogo;
       'species.species': SpeciesSpecies;

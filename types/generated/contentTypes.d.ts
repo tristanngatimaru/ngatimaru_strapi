@@ -390,6 +390,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     EventDate: Schema.Attribute.Date;
+    Excerpt: Schema.Attribute.Text;
     ExtraMediaContent: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -468,16 +469,50 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::global.global'
     > &
       Schema.Attribute.Private;
+    NavBar: Schema.Attribute.Component<'layout.header', false>;
     PageHeaders: Schema.Attribute.Component<'layout.hero-header', true>;
     publishedAt: Schema.Attribute.DateTime;
-    Title: Schema.Attribute.String;
+    SEO: Schema.Attribute.Component<'shared.default-seo', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
+  collectionName: 'home_pages';
+  info: {
+    displayName: 'HomePage';
+    pluralName: 'home-pages';
+    singularName: 'home-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Button: Schema.Attribute.Component<'shared.link', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    HeaderSection: Schema.Attribute.Component<'layout.hero-header', false>;
+    IntroSection: Schema.Attribute.Text;
+    IntroTitleOrQuote: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-page.home-page'
+    > &
+      Schema.Attribute.Private;
+    Mihi: Schema.Attribute.Text;
+    MihiShortened: Schema.Attribute.Text;
+    MihiTitle: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -531,6 +566,30 @@ export interface ApiMataiWhetuApplicationMataiWhetuApplication
     WhanauOrOrganisationName: Schema.Attribute.String;
     WharekaiFirstName: Schema.Attribute.String;
     WharekaiLastName: Schema.Attribute.String;
+  };
+}
+
+export interface ApiPagePage extends Struct.CollectionTypeSchema {
+  collectionName: 'pages';
+  info: {
+    displayName: 'Page';
+    pluralName: 'pages';
+    singularName: 'page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1168,7 +1227,9 @@ declare module '@strapi/strapi' {
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'api::fishing-permit-application.fishing-permit-application': ApiFishingPermitApplicationFishingPermitApplication;
       'api::global.global': ApiGlobalGlobal;
+      'api::home-page.home-page': ApiHomePageHomePage;
       'api::matai-whetu-application.matai-whetu-application': ApiMataiWhetuApplicationMataiWhetuApplication;
+      'api::page.page': ApiPagePage;
       'api::register-application.register-application': ApiRegisterApplicationRegisterApplication;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

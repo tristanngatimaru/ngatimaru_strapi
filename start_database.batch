@@ -1,0 +1,3 @@
+@echo off
+cd /d D:\WorkFiles\ngatimaru_strapi
+start cmd.exe /k "npm run develop"

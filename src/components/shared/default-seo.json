@@ -1,26 +1,25 @@
 {
-  "collectionName": "components_shared_headers",
+  "collectionName": "components_shared_default_seos",
   "info": {
-    "displayName": "Header"
+    "displayName": "defaultSEO",
+    "icon": "link"
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "metaTitle": {
       "type": "string"
     },
-    "TeReoLabel": {
-      "type": "string"
+    "metaDescription": {
+      "type": "text"
     },
-    "EnglishLabel": {
-      "type": "string"
-    },
-    "HeaderImage": {
+    "metaImage": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
+        "images",
         "files",
         "videos",
-        "images"
+        "audios"
       ]
     }
   },

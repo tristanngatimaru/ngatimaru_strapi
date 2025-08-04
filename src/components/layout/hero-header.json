@@ -5,10 +5,20 @@
   },
   "options": {},
   "attributes": {
-    "Header": {
-      "type": "component",
-      "component": "shared.header",
-      "repeatable": false
+    "TeReoTitle": {
+      "type": "string"
+    },
+    "EnglishTitle": {
+      "type": "string"
+    },
+    "BackgroundHeaderImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
     }
   },
   "config": {}

@@ -11,15 +11,19 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
-      "type": "string"
-    },
-    "Description": {
-      "type": "text"
+    "NavBar": {
+      "type": "component",
+      "component": "layout.header",
+      "repeatable": false
     },
     "PageHeaders": {
       "type": "component",
       "component": "layout.hero-header",
+      "repeatable": true
+    },
+    "SEO": {
+      "type": "component",
+      "component": "shared.default-seo",
       "repeatable": true
     }
   }
