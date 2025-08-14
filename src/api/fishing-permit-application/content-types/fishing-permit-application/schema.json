@@ -47,9 +47,9 @@
     "VenueContactNumber": {
       "type": "string"
     },
-    "SpeciesAndHarvest": {
+    "Species": {
       "type": "component",
-      "component": "species.species",
+      "component": "shared.species",
       "repeatable": true
     }
   }

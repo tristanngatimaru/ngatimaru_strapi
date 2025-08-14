@@ -1,0 +1,33 @@
+{
+  "kind": "singleType",
+  "collectionName": "matai_whetu_pages",
+  "info": {
+    "singularName": "matai-whetu-page",
+    "pluralName": "matai-whetu-pages",
+    "displayName": "MataiWhetuPage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HeaderSection": {
+      "type": "component",
+      "component": "layout.header-section",
+      "repeatable": false
+    },
+    "Content": {
+      "type": "text"
+    },
+    "Tikanga": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

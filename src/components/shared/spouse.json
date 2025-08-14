@@ -1,0 +1,47 @@
+{
+  "collectionName": "components_shared_spouses",
+  "info": {
+    "displayName": "Spouse"
+  },
+  "options": {},
+  "attributes": {
+    "Salutation": {
+      "type": "enumeration",
+      "enum": [
+        "Master",
+        "Mr",
+        "Miss",
+        "Mrs",
+        "Ms",
+        "Mx"
+      ]
+    },
+    "Gender": {
+      "type": "enumeration",
+      "enum": [
+        "Male",
+        "Female",
+        "Gender Diverse"
+      ]
+    },
+    "DateOfBirth": {
+      "type": "date"
+    },
+    "FirstName": {
+      "type": "string"
+    },
+    "LastName": {
+      "type": "string"
+    },
+    "MaidenName": {
+      "type": "string"
+    },
+    "AlsoKnownAs": {
+      "type": "string"
+    },
+    "Iwi": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

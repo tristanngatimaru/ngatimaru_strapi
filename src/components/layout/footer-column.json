@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_layout_footer_columns",
+  "info": {
+    "displayName": "FooterColumn"
+  },
+  "options": {},
+  "attributes": {
+    "ContentTItle": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "component",
+      "component": "layout.content",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

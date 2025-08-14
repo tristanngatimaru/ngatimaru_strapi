@@ -1,26 +1,71 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface LayoutButton extends Struct.ComponentSchema {
+  collectionName: 'components_layout_buttons';
+  info: {
+    displayName: 'Button';
+  };
+  attributes: {
+    EnglishLabel: Schema.Attribute.String;
+    href: Schema.Attribute.String;
+    TeReoLabel: Schema.Attribute.String;
+  };
+}
+
+export interface LayoutContent extends Struct.ComponentSchema {
+  collectionName: 'components_layout_contents';
+  info: {
+    displayName: 'Content';
+  };
+  attributes: {
+    ContentText: Schema.Attribute.Text;
+  };
+}
+
+export interface LayoutFooterColumn extends Struct.ComponentSchema {
+  collectionName: 'components_layout_footer_columns';
+  info: {
+    displayName: 'FooterColumn';
+  };
+  attributes: {
+    Content: Schema.Attribute.Component<'layout.content', true>;
+    ContentTItle: Schema.Attribute.String;
+  };
+}
+
 export interface LayoutHeader extends Struct.ComponentSchema {
   collectionName: 'components_layout_headers';
   info: {
     displayName: 'NavBar';
   };
-  attributes: {
-    NavigationItems: Schema.Attribute.Component<'shared.link', true>;
-  };
+  attributes: {};
 }
 
-export interface LayoutHeroHeader extends Struct.ComponentSchema {
-  collectionName: 'components_layout_hero_headers';
+export interface LayoutHeaderSection extends Struct.ComponentSchema {
+  collectionName: 'components_layout_header_sections';
   info: {
-    displayName: 'HeroHeader';
+    displayName: 'HeaderSection';
   };
   attributes: {
     BackgroundHeaderImage: Schema.Attribute.Media<
-      'images' | 'files' | 'videos'
+      'images' | 'files' | 'videos' | 'audios'
     >;
     EnglishTitle: Schema.Attribute.String;
     TeReoTitle: Schema.Attribute.String;
+  };
+}
+
+export interface LayoutMihiSection extends Struct.ComponentSchema {
+  collectionName: 'components_layout_mihi_sections';
+  info: {
+    displayName: 'MihiSection';
+  };
+  attributes: {
+    FullMihi: Schema.Attribute.Text;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    MihiShortened: Schema.Attribute.Text;
+    ShortNeeded: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    Title: Schema.Attribute.String;
   };
 }
 
@@ -31,7 +76,10 @@ export interface LayoutNavigation extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    headers: Schema.Attribute.Component<'layout.header', false>;
+    href: Schema.Attribute.String;
+    TitleEnglish: Schema.Attribute.String;
+    TitleTeReo: Schema.Attribute.String;
+    Visible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -48,6 +96,19 @@ export interface SharedDefaultSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedFaceCard extends Struct.ComponentSchema {
+  collectionName: 'components_shared_face_cards';
+  info: {
+    displayName: 'FaceCard';
+    icon: 'priceTag';
+  };
+  attributes: {
+    Detail: Schema.Attribute.Text;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Name: Schema.Attribute.String;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -57,11 +118,9 @@ export interface SharedLink extends Struct.ComponentSchema {
   attributes: {
     EnglishLabel: Schema.Attribute.String;
     href: Schema.Attribute.String;
-    IsButtonLink: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     IsExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     IsVisible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     TeReoLabel: Schema.Attribute.String;
-    Type: Schema.Attribute.Enumeration<['PRIMARY', 'SECONDARY']>;
   };
 }
 
@@ -79,31 +138,55 @@ export interface SharedLogo extends Struct.ComponentSchema {
   };
 }
 
-export interface SpeciesSpecies extends Struct.ComponentSchema {
-  collectionName: 'components_species_species';
+export interface SharedSpecies extends Struct.ComponentSchema {
+  collectionName: 'components_shared_species';
   info: {
     displayName: 'Species';
-    icon: 'priceTag';
   };
   attributes: {
-    AreaSpeciesIsHarvested: Schema.Attribute.String;
-    DateandApproxTimeOfHarvesting: Schema.Attribute.Text;
-    MethodOfHarvest: Schema.Attribute.String;
-    NameOfSpecies: Schema.Attribute.String;
-    PlaceSpeciesIsLanded: Schema.Attribute.String;
+    AreaLanded: Schema.Attribute.Text;
+    AreaTaken: Schema.Attribute.Text;
+    HarvestMethod: Schema.Attribute.Text;
+    SpeciesName: Schema.Attribute.String;
+    TimeOfHarves: Schema.Attribute.DateTime;
+  };
+}
+
+export interface SharedSpouse extends Struct.ComponentSchema {
+  collectionName: 'components_shared_spouses';
+  info: {
+    displayName: 'Spouse';
+  };
+  attributes: {
+    AlsoKnownAs: Schema.Attribute.String;
+    DateOfBirth: Schema.Attribute.Date;
+    FirstName: Schema.Attribute.String;
+    Gender: Schema.Attribute.Enumeration<['Male', 'Female', 'Gender Diverse']>;
+    Iwi: Schema.Attribute.String;
+    LastName: Schema.Attribute.String;
+    MaidenName: Schema.Attribute.String;
+    Salutation: Schema.Attribute.Enumeration<
+      ['Master', 'Mr', 'Miss', 'Mrs', 'Ms', 'Mx']
+    >;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'layout.button': LayoutButton;
+      'layout.content': LayoutContent;
+      'layout.footer-column': LayoutFooterColumn;
       'layout.header': LayoutHeader;
-      'layout.hero-header': LayoutHeroHeader;
+      'layout.header-section': LayoutHeaderSection;
+      'layout.mihi-section': LayoutMihiSection;
       'layout.navigation': LayoutNavigation;
       'shared.default-seo': SharedDefaultSeo;
+      'shared.face-card': SharedFaceCard;
       'shared.link': SharedLink;
       'shared.logo': SharedLogo;
-      'species.species': SpeciesSpecies;
+      'shared.species': SharedSpecies;
+      'shared.spouse': SharedSpouse;
     }
   }
 }

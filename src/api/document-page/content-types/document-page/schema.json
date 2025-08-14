@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "document_pages",
+  "info": {
+    "singularName": "document-page",
+    "pluralName": "document-pages",
+    "displayName": "DocumentPage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HeaderSection": {
+      "type": "component",
+      "component": "layout.header-section",
+      "repeatable": false
+    },
+    "Documentation": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

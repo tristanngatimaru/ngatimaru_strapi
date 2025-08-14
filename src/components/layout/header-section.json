@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_layout_header_sections",
+  "info": {
+    "displayName": "HeaderSection"
+  },
+  "options": {},
+  "attributes": {
+    "TeReoTitle": {
+      "type": "string"
+    },
+    "EnglishTitle": {
+      "type": "string"
+    },
+    "BackgroundHeaderImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

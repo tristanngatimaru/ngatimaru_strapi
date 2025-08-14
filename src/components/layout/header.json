@@ -4,12 +4,6 @@
     "displayName": "NavBar"
   },
   "options": {},
-  "attributes": {
-    "NavigationItems": {
-      "type": "component",
-      "component": "shared.link",
-      "repeatable": true
-    }
-  },
+  "attributes": {},
   "config": {}
 }

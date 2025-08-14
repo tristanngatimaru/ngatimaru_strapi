@@ -16,11 +16,6 @@
       "component": "layout.header",
       "repeatable": false
     },
-    "PageHeaders": {
-      "type": "component",
-      "component": "layout.hero-header",
-      "repeatable": true
-    },
     "SEO": {
       "type": "component",
       "component": "shared.default-seo",

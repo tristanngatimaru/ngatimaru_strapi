@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_layout_contents",
+  "info": {
+    "displayName": "Content"
+  },
+  "options": {},
+  "attributes": {
+    "ContentText": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

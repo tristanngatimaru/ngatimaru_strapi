@@ -11,18 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "TItle": {
-      "type": "string"
-    },
-    "Excerpt": {
-      "type": "text"
-    },
-    "Content": {
-      "type": "text"
-    },
-    "EventDate": {
-      "type": "date"
-    },
     "HeroMainImage": {
       "type": "media",
       "multiple": false,
@@ -33,6 +21,18 @@
         "audios"
       ]
     },
+    "Title": {
+      "type": "string"
+    },
+    "Author": {
+      "type": "string"
+    },
+    "EventDate": {
+      "type": "date"
+    },
+    "ContentPartOne": {
+      "type": "text"
+    },
     "SecondaryImage": {
       "type": "media",
       "multiple": false,
@@ -41,6 +41,9 @@
         "files"
       ]
     },
+    "ContentPartTwo": {
+      "type": "text"
+    },
     "ThirdImage": {
       "type": "media",
       "multiple": false,
@@ -48,6 +51,9 @@
         "images",
         "files"
       ]
+    },
+    "ContentPartThree": {
+      "type": "text"
     },
     "ExtraMediaContent": {
       "type": "media",
@@ -59,8 +65,11 @@
         "audios"
       ]
     },
-    "Author": {
-      "type": "string"
+    "ExcerptOne": {
+      "type": "text"
+    },
+    "ExcerptTwo": {
+      "type": "text"
     }
   }
 }

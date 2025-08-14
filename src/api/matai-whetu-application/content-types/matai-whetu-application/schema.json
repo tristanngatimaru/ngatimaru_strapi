@@ -11,71 +11,76 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "FirstName": {
+    "firstName": {
       "type": "string"
     },
-    "LastName": {
+    "lastName": {
       "type": "string"
     },
-    "PhoneNumber": {
+    "phone": {
       "type": "string"
     },
-    "Email": {
+    "email": {
       "type": "string"
     },
-    "WhanauOrOrganisationName": {
+    "organisationName": {
       "type": "string"
     },
-    "DetailsOfWhanauOrOrganisation": {
+    "detailsOfWhanauOrOrganisation": {
       "type": "text"
     },
-    "PowhiriRequired": {
+    "firstNameResponsible": {
       "type": "string"
     },
-    "FirstNameResonsible": {
+    "lastNameResponsible": {
       "type": "string"
     },
-    "LastNameResponsible": {
+    "phoneResponsible": {
       "type": "string"
     },
-    "PhoneResponsible": {
+    "emailResponsible": {
       "type": "string"
     },
-    "EmailResponsible": {
-      "type": "string"
-    },
-    "BookingPurpose": {
+    "bookingPurpose": {
       "type": "text"
     },
-    "BookingFrom": {
+    "bookingFrom": {
       "type": "date"
     },
-    "BookingTo": {
+    "bookingTo": {
       "type": "date"
     },
-    "FirstNameWharenui": {
+    "firstNameWharenui": {
       "type": "string"
     },
-    "LastNameWharenui": {
+    "lastNameWharenui": {
       "type": "string"
     },
-    "WharekaiFirstName": {
+    "firstNameWharekai": {
       "type": "string"
     },
-    "WharekaiLastName": {
+    "lastNameWharekai": {
       "type": "string"
     },
-    "AblutionFirstName": {
+    "ablutionFirstName": {
       "type": "string"
     },
-    "AblutionLastName": {
+    "ablutionLastName": {
       "type": "string"
     },
-    "AgreedToAllAgreements": {
-      "type": "string"
+    "agreedToTerms": {
+      "type": "boolean"
     },
-    "OpenedAndAgreedToTikangaInfoSheet": {
-      "type": "string"
+    "powhiri": {
+      "type": "enumeration",
+      "enum": [
+        "Yes, we have waewae tapu",
+        "No, we have all been welcome to the Marae Before",
+        "Unsure, need clarification"
+      ]
+    },
+    "readTikangaInfoSheet": {
+      "type": "boolean"
     }
   }
 }

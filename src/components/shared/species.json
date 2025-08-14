@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_species",
+  "info": {
+    "displayName": "Species"
+  },
+  "options": {},
+  "attributes": {
+    "SpeciesName": {
+      "type": "string"
+    },
+    "HarvestMethod": {
+      "type": "text"
+    },
+    "AreaTaken": {
+      "type": "text"
+    },
+    "AreaLanded": {
+      "type": "text"
+    },
+    "TimeOfHarves": {
+      "type": "datetime"
+    }
+  },
+  "config": {}
+}

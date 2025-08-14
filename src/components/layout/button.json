@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_layout_buttons",
+  "info": {
+    "displayName": "Button"
+  },
+  "options": {},
+  "attributes": {
+    "EnglishLabel": {
+      "type": "string"
+    },
+    "TeReoLabel": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

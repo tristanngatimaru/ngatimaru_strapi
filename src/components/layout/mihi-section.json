@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_layout_mihi_sections",
+  "info": {
+    "displayName": "MihiSection"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "MihiShortened": {
+      "type": "text"
+    },
+    "FullMihi": {
+      "type": "text"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "ShortNeeded": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "config": {}
+}

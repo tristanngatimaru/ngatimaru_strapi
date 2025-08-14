@@ -6,10 +6,18 @@
   },
   "options": {},
   "attributes": {
-    "headers": {
-      "type": "component",
-      "component": "layout.header",
-      "repeatable": false
+    "href": {
+      "type": "string"
+    },
+    "TitleEnglish": {
+      "type": "string"
+    },
+    "TitleTeReo": {
+      "type": "string"
+    },
+    "Visible": {
+      "type": "boolean",
+      "default": true
     }
   },
   "config": {}

@@ -186,6 +186,38 @@
     },
     "AgreeToTerms": {
       "type": "boolean"
+    },
+    "Spouse": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "PersonalSpouce"
+            },
+            true
+          ]
+        }
+      },
+      "component": "shared.spouse",
+      "repeatable": false
+    },
+    "PostalAddress": {
+      "type": "boolean",
+      "default": false
+    },
+    "PostalAddressYes": {
+      "type": "text",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "PostalAddress"
+            },
+            true
+          ]
+        }
+      }
     }
   }
 }

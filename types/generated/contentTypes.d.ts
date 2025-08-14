@@ -373,6 +373,42 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAboutAbout extends Struct.SingleTypeSchema {
+  collectionName: 'abouts';
+  info: {
+    displayName: 'About';
+    pluralName: 'abouts';
+    singularName: 'about';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Schema.Attribute.Text;
+    ContentHeader: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    FaceCard: Schema.Attribute.Component<'shared.face-card', true>;
+    Header: Schema.Attribute.Component<'layout.header-section', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::about.about'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    SidePanelImageOne: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    SidePanelImageTwo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    TrusteesList: Schema.Attribute.Text;
+    TrusteesTitle: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
   collectionName: 'blog_posts';
   info: {
@@ -385,12 +421,15 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
   };
   attributes: {
     Author: Schema.Attribute.String;
-    Content: Schema.Attribute.Text;
+    ContentPartOne: Schema.Attribute.Text;
+    ContentPartThree: Schema.Attribute.Text;
+    ContentPartTwo: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     EventDate: Schema.Attribute.Date;
-    Excerpt: Schema.Attribute.Text;
+    ExcerptOne: Schema.Attribute.Text;
+    ExcerptTwo: Schema.Attribute.Text;
     ExtraMediaContent: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -407,7 +446,39 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     SecondaryImage: Schema.Attribute.Media<'images' | 'files'>;
     ThirdImage: Schema.Attribute.Media<'images' | 'files'>;
-    TItle: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDocumentPageDocumentPage extends Struct.SingleTypeSchema {
+  collectionName: 'document_pages';
+  info: {
+    displayName: 'DocumentPage';
+    pluralName: 'document-pages';
+    singularName: 'document-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Documentation: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    HeaderSection: Schema.Attribute.Component<'layout.header-section', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::document-page.document-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -444,7 +515,7 @@ export interface ApiFishingPermitApplicationFishingPermitApplication
     PhoneNumber: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     PurposeForFishing: Schema.Attribute.Boolean;
-    SpeciesAndHarvest: Schema.Attribute.Component<'species.species', true>;
+    Species: Schema.Attribute.Component<'shared.species', true>;
     StreetAddress: Schema.Attribute.Text;
     ToBeUsedAt: Schema.Attribute.String;
     ToBeUsedWhen: Schema.Attribute.Date;
@@ -452,6 +523,64 @@ export interface ApiFishingPermitApplicationFishingPermitApplication
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     VenueContactNumber: Schema.Attribute.String;
+  };
+}
+
+export interface ApiFishingPermitFishingPermit extends Struct.SingleTypeSchema {
+  collectionName: 'fishing_permits';
+  info: {
+    displayName: 'FishingPermit';
+    pluralName: 'fishing-permits';
+    singularName: 'fishing-permit';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    HeaderSection: Schema.Attribute.Component<'layout.header-section', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::fishing-permit.fishing-permit'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterFooter extends Struct.SingleTypeSchema {
+  collectionName: 'footers';
+  info: {
+    displayName: 'Footer';
+    pluralName: 'footers';
+    singularName: 'footer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Copyright: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    FooterColumn: Schema.Attribute.Component<'layout.footer-column', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer.footer'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -476,7 +605,6 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     NavBar: Schema.Attribute.Component<'layout.header', false>;
-    PageHeaders: Schema.Attribute.Component<'layout.hero-header', true>;
     publishedAt: Schema.Attribute.DateTime;
     SEO: Schema.Attribute.Component<'shared.default-seo', true>;
     updatedAt: Schema.Attribute.DateTime;
@@ -485,33 +613,26 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
-  collectionName: 'home_pages';
+export interface ApiHomeHome extends Struct.SingleTypeSchema {
+  collectionName: 'homes';
   info: {
-    displayName: 'HomePage';
-    pluralName: 'home-pages';
-    singularName: 'home-page';
+    displayName: 'Home';
+    pluralName: 'homes';
+    singularName: 'home';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Button: Schema.Attribute.Component<'shared.link', true>;
+    Button: Schema.Attribute.Component<'layout.button', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    HeaderSection: Schema.Attribute.Component<'layout.hero-header', false>;
-    IntroSection: Schema.Attribute.Text;
-    IntroTitleOrQuote: Schema.Attribute.Text;
+    HeaderSection: Schema.Attribute.Component<'layout.header-section', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::home-page.home-page'
-    > &
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'> &
       Schema.Attribute.Private;
-    Mihi: Schema.Attribute.Text;
-    MihiShortened: Schema.Attribute.Text;
-    MihiTitle: Schema.Attribute.String;
+    MihiSection: Schema.Attribute.Component<'layout.mihi-section', false>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -531,41 +652,106 @@ export interface ApiMataiWhetuApplicationMataiWhetuApplication
     draftAndPublish: true;
   };
   attributes: {
-    AblutionFirstName: Schema.Attribute.String;
-    AblutionLastName: Schema.Attribute.String;
-    AgreedToAllAgreements: Schema.Attribute.String;
-    BookingFrom: Schema.Attribute.Date;
-    BookingPurpose: Schema.Attribute.Text;
-    BookingTo: Schema.Attribute.Date;
+    ablutionFirstName: Schema.Attribute.String;
+    ablutionLastName: Schema.Attribute.String;
+    agreedToTerms: Schema.Attribute.Boolean;
+    bookingFrom: Schema.Attribute.Date;
+    bookingPurpose: Schema.Attribute.Text;
+    bookingTo: Schema.Attribute.Date;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    DetailsOfWhanauOrOrganisation: Schema.Attribute.Text;
-    Email: Schema.Attribute.String;
-    EmailResponsible: Schema.Attribute.String;
-    FirstName: Schema.Attribute.String;
-    FirstNameResonsible: Schema.Attribute.String;
-    FirstNameWharenui: Schema.Attribute.String;
-    LastName: Schema.Attribute.String;
-    LastNameResponsible: Schema.Attribute.String;
-    LastNameWharenui: Schema.Attribute.String;
+    detailsOfWhanauOrOrganisation: Schema.Attribute.Text;
+    email: Schema.Attribute.String;
+    emailResponsible: Schema.Attribute.String;
+    firstName: Schema.Attribute.String;
+    firstNameResponsible: Schema.Attribute.String;
+    firstNameWharekai: Schema.Attribute.String;
+    firstNameWharenui: Schema.Attribute.String;
+    lastName: Schema.Attribute.String;
+    lastNameResponsible: Schema.Attribute.String;
+    lastNameWharekai: Schema.Attribute.String;
+    lastNameWharenui: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::matai-whetu-application.matai-whetu-application'
     > &
       Schema.Attribute.Private;
-    OpenedAndAgreedToTikangaInfoSheet: Schema.Attribute.String;
-    PhoneNumber: Schema.Attribute.String;
-    PhoneResponsible: Schema.Attribute.String;
-    PowhiriRequired: Schema.Attribute.String;
+    organisationName: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    phoneResponsible: Schema.Attribute.String;
+    powhiri: Schema.Attribute.Enumeration<
+      [
+        'Yes, we have waewae tapu',
+        'No, we have all been welcome to the Marae Before',
+        'Unsure, need clarification',
+      ]
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    readTikangaInfoSheet: Schema.Attribute.Boolean;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMataiWhetuPageMataiWhetuPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'matai_whetu_pages';
+  info: {
+    displayName: 'MataiWhetuPage';
+    pluralName: 'matai-whetu-pages';
+    singularName: 'matai-whetu-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    HeaderSection: Schema.Attribute.Component<'layout.header-section', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::matai-whetu-page.matai-whetu-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Tikanga: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNavigationBarNavigationBar extends Struct.SingleTypeSchema {
+  collectionName: 'navigation_bars';
+  info: {
+    displayName: 'NavigationBar';
+    pluralName: 'navigation-bars';
+    singularName: 'navigation-bar';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::navigation-bar.navigation-bar'
+    > &
+      Schema.Attribute.Private;
+    Navigation: Schema.Attribute.Component<'layout.navigation', true>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    WhanauOrOrganisationName: Schema.Attribute.String;
-    WharekaiFirstName: Schema.Attribute.String;
-    WharekaiLastName: Schema.Attribute.String;
   };
 }
 
@@ -683,6 +869,8 @@ export interface ApiRegisterApplicationRegisterApplication
     >;
     PersonalSpouce: Schema.Attribute.Boolean;
     PersonalWorkPhone: Schema.Attribute.String;
+    PostalAddress: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    PostalAddressYes: Schema.Attribute.Text;
     PrincipleHapu: Schema.Attribute.Enumeration<
       [
         'Te Ahumua',
@@ -708,6 +896,37 @@ export interface ApiRegisterApplicationRegisterApplication
     >;
     PrincipleMarae: Schema.Attribute.String;
     PrincipleOtherIwiAffiliation: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    Spouse: Schema.Attribute.Component<'shared.spouse', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRegisterRegister extends Struct.SingleTypeSchema {
+  collectionName: 'registers';
+  info: {
+    displayName: 'Register';
+    pluralName: 'registers';
+    singularName: 'register';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    HeaderSection: Schema.Attribute.Component<'layout.header-section', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::register.register'
+    > &
+      Schema.Attribute.Private;
+    PostInfo: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1224,13 +1443,20 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::about.about': ApiAboutAbout;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
+      'api::document-page.document-page': ApiDocumentPageDocumentPage;
       'api::fishing-permit-application.fishing-permit-application': ApiFishingPermitApplicationFishingPermitApplication;
+      'api::fishing-permit.fishing-permit': ApiFishingPermitFishingPermit;
+      'api::footer.footer': ApiFooterFooter;
       'api::global.global': ApiGlobalGlobal;
-      'api::home-page.home-page': ApiHomePageHomePage;
+      'api::home.home': ApiHomeHome;
       'api::matai-whetu-application.matai-whetu-application': ApiMataiWhetuApplicationMataiWhetuApplication;
+      'api::matai-whetu-page.matai-whetu-page': ApiMataiWhetuPageMataiWhetuPage;
+      'api::navigation-bar.navigation-bar': ApiNavigationBarNavigationBar;
       'api::page.page': ApiPagePage;
       'api::register-application.register-application': ApiRegisterApplicationRegisterApplication;
+      'api::register.register': ApiRegisterRegister;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

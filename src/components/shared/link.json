@@ -22,17 +22,6 @@
     "IsExternal": {
       "type": "boolean",
       "default": false
-    },
-    "IsButtonLink": {
-      "type": "boolean",
-      "default": false
-    },
-    "Type": {
-      "type": "enumeration",
-      "enum": [
-        "PRIMARY",
-        "SECONDARY"
-      ]
     }
   },
   "config": {}
