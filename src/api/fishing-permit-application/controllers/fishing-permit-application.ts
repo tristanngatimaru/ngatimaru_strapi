@@ -9,36 +9,42 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async create(ctx) {
       // Debug the incoming request
-      console.log("🔍 Fishing Permit Raw request body:", JSON.stringify(ctx.request.body, null, 2));
-      console.log("🔍 Fishing Permit Request method:", ctx.request.method);
-      console.log("🔍 Fishing Permit Request headers:", JSON.stringify(ctx.request.headers, null, 2));
+        console.log("🔍 Fishing Permit Raw request body:", JSON.stringify(ctx.request.body, null, 2));
+        console.log("🔍 Fishing Permit Request method:", ctx.request.method);
+        console.log("🔍 Fishing Permit Request headers:", JSON.stringify(ctx.request.headers, null, 2));
 
-      // Call the default create method
-      const response = await super.create(ctx);
+        // Let's also check if there are any relations or components we need to populate
+        const result = await strapi.entityService.create("api::fishing-permit-application.fishing-permit-application", {
+          data: ctx.request.body.data,
+          populate: "*", // This should populate any nested components or relations
+        });
 
-      // Send notification email after successful creation
-      try {
-        const data = response.data;
+        console.log("📧 Fishing Permit Full response data with population:", JSON.stringify(result, null, 2));
+        
+        // Call the default create method
+        const response = await super.create(ctx);
 
-        // Debug logging to see what data we're getting
-        console.log(
-          "📧 Fishing Permit Full response data:",
-          JSON.stringify(response, null, 2)
-        );
-        console.log(
-          "📧 Fishing Permit Data attributes:",
-          JSON.stringify(data.attributes, null, 2)
-        );
-        console.log(
-          "📧 Fishing Permit Response data keys:",
-          Object.keys(response)
-        );
-        console.log(
-          "📧 Fishing Permit Data keys:",
-          Object.keys(data)
-        );
+        // Send notification email after successful creation
+        try {
+          const data = result as any; // Use populated result instead of response.data
 
-        // Use Strapi Cloud's built-in email service
+          // Debug logging to see what data we're getting
+          console.log(
+            "📧 Fishing Permit Full response data:",
+            JSON.stringify(response, null, 2)
+          );
+          console.log(
+            "📧 Fishing Permit Data populated:",
+            JSON.stringify(data, null, 2)
+          );
+          console.log(
+            "📧 Fishing Permit Response data keys:",
+            Object.keys(response)
+          );
+          console.log(
+            "📧 Fishing Permit Data keys:",
+            Object.keys(data)
+          );        // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
           to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎣 New Fishing Permit Application",
@@ -62,9 +68,9 @@ export default factories.createCoreController(
           
           <h3><strong>Species Information</strong></h3>
           ${
-            data?.Species && Array.isArray(data.Species)
+            data?.Species && Array.isArray(data.Species) && data.Species.length > 0
               ? data.Species.map(
-                  (species, index) => `
+                  (species: any, index: number) => `
             <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
               <h4><strong>Species ${index + 1}</strong></h4>
               <p><strong>Species Name:</strong> ${species?.SpeciesName || "Not provided"}</p>
@@ -75,7 +81,9 @@ export default factories.createCoreController(
             </div>
             `
                 ).join("")
-              : "<p>No species information provided</p>"
+              : `<p><strong>⚠️ No species information found.</strong></p>
+                 <p><strong>Debug:</strong> Species data structure: ${JSON.stringify(data?.Species || "Not found", null, 2)}</p>
+                 <p><strong>Note:</strong> Species might be stored as a different field name or nested differently.</p>`
           }
           
           <hr>
@@ -85,6 +93,7 @@ export default factories.createCoreController(
           <hr>
           <p><strong>DEBUG - Available Fields:</strong></p>
           <pre>${JSON.stringify(Object.keys(data || {}), null, 2)}</pre>
+          <p><strong>DEBUG - Full Data Structure:</strong></p>
           <pre>${JSON.stringify(data, null, 2)}</pre>
           
           <hr>

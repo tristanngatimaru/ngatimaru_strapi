@@ -76,10 +76,6 @@ export default factories.createCoreController(
           <p><strong>Name:</strong> ${data?.ablutionFirstName || "Not provided"} ${data?.ablutionLastName || "Not provided"}</p>
           
           <h3><strong>Acknowledgements</strong></h3>
-          <p><strong>No Alcohol & Drugs:</strong> ${data?.acknowledgesNoAlcohol ? "✅ Acknowledged" : "❌ Not acknowledged"}</p>
-          <p><strong>No Photos/Videos in Wharenui:</strong> ${data?.acknowledgesNoPhotos ? "✅ Acknowledged" : "❌ Not acknowledged"}</p>
-          <p><strong>No Food/Drink in Wharenui:</strong> ${data?.acknowledgesNoFood ? "✅ Acknowledged" : "❌ Not acknowledged"}</p>
-          <p><strong>Smoking/Vaping Policy:</strong> ${data?.acknowledgesSmokingArea ? "✅ Acknowledged" : "❌ Not acknowledged"}</p>
           <p><strong>Terms & Conditions:</strong> ${data?.agreedToTerms ? "✅ Agreed" : "❌ Not agreed"}</p>
           <p><strong>Tikanga Info Sheet Read:</strong> ${data?.readTikangaInfoSheet ? "✅ Read" : "❌ Not read"}</p>
           

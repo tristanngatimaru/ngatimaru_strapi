@@ -9,36 +9,42 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async create(ctx) {
       // Debug the incoming request
-      console.log("🔍 Raw request body:", JSON.stringify(ctx.request.body, null, 2));
-      console.log("🔍 Request method:", ctx.request.method);
-      console.log("🔍 Request headers:", JSON.stringify(ctx.request.headers, null, 2));
+        console.log("🔍 Raw request body:", JSON.stringify(ctx.request.body, null, 2));
+        console.log("🔍 Request method:", ctx.request.method);
+        console.log("🔍 Request headers:", JSON.stringify(ctx.request.headers, null, 2));
 
-      // Call the default create method
-      const response = await super.create(ctx);
+        // Let's also check if there are any relations or components we need to populate
+        const result = await strapi.entityService.create("api::register-application.register-application", {
+          data: ctx.request.body.data,
+          populate: "*", // This should populate any nested components or relations
+        });
 
-      // Send notification email after successful creation
-      try {
-        const data = response.data;
+        console.log("📧 Registration Full response data with population:", JSON.stringify(result, null, 2));
+        
+        // Call the default create method
+        const response = await super.create(ctx);
 
-        // Debug logging to see what data we're getting
-        console.log(
-          "📧 Full response data:",
-          JSON.stringify(response, null, 2)
-        );
-        console.log(
-          "📧 Data attributes:",
-          JSON.stringify(data.attributes, null, 2)
-        );
-        console.log(
-          "📧 Response data keys:",
-          Object.keys(response)
-        );
-        console.log(
-          "📧 Data keys:",
-          Object.keys(data)
-        );
+        // Send notification email after successful creation
+        try {
+          const data = result as any; // Use populated result for nested components
 
-        // Use Strapi Cloud's built-in email service
+          // Debug logging to see what data we're getting
+          console.log(
+            "📧 Full response data:",
+            JSON.stringify(response, null, 2)
+          );
+          console.log(
+            "📧 Data populated:",
+            JSON.stringify(data, null, 2)
+          );
+          console.log(
+            "📧 Response data keys:",
+            Object.keys(response)
+          );
+          console.log(
+            "📧 Data keys:",
+            Object.keys(data)
+          );        // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
           to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎯 New Register Application Received",
@@ -74,32 +80,73 @@ export default factories.createCoreController(
           <p><strong>Other Marae:</strong> ${data?.OtherMarae || "Not provided"}</p>
           <p><strong>Descendant Affiliation:</strong> ${data?.DecendantAffiliation || "Not provided"}</p>
           
-          <h3><strong>Genealogy - Father's Side (Men)</strong></h3>
-          <p><strong>Father's Great Grandfather:</strong> ${data?.FatherGreatGrandFatherMen || "Not provided"}</p>
-          <p><strong>Father's Great Grandmother (Men line):</strong> ${data?.FatherGreatGrandMotherMen || "Not provided"}</p>
-          <p><strong>Father's Grandfather:</strong> ${data?.FatherGrandFather || "Not provided"}</p>
-          <p><strong>Father:</strong> ${data?.Father || "Not provided"}</p>
-          
-          <h3><strong>Genealogy - Father's Side (Women)</strong></h3>
-          <p><strong>Father's Great Grandfather (Women line):</strong> ${data?.FatherGreatGrandFatherWomen || "Not provided"}</p>
-          <p><strong>Father's Great Grandmother (Women line):</strong> ${data?.FatherGreatGrandMotherWomen || "Not provided"}</p>
-          <p><strong>Father's Grandmother:</strong> ${data?.FatherGrandMother || "Not provided"}</p>
-          
-          <h3><strong>Genealogy - Mother's Side (Men)</strong></h3>
-          <p><strong>Mother's Great Grandfather:</strong> ${data?.MotherGreatGrandFatherMen || "Not provided"}</p>
-          <p><strong>Mother's Great Grandmother (Men line):</strong> ${data?.MotherGreatGrandMotherMen || "Not provided"}</p>
-          <p><strong>Mother's Grandfather:</strong> ${data?.MotherGrandFather || "Not provided"}</p>
-          
-          <h3><strong>Genealogy - Mother's Side (Women)</strong></h3>
-          <p><strong>Mother's Great Grandfather (Women line):</strong> ${data?.MotherGreatGrandFatherWomen || "Not provided"}</p>
-          <p><strong>Mother's Great Grandmother (Women line):</strong> ${data?.MotherGreatGrandMotherWomen || "Not provided"}</p>
-          <p><strong>Mother's Grandmother:</strong> ${data?.MotherGrandMother || "Not provided"}</p>
-          <p><strong>Mother:</strong> ${data?.Mother || "Not provided"}</p>
+          <h3><strong>🌳 Family Tree (Whakatauki)</strong></h3>
+          <div style="font-family: monospace; background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
+            <h4><strong>👨 Father's Side (Tamatāne)</strong></h4>
+            <div style="margin-left: 20px;">
+              <p><strong>Great-Great Grandfathers:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.FatherGreatGrandFatherMen || "Not provided"} ♂</p>
+                <p>└── ${data?.FatherGreatGrandMotherMen || "Not provided"} ♂</p>
+              </div>
+              <p><strong>Great Grandfathers:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.FatherGrandFather || "Not provided"} ♂</p>
+              </div>
+              <p><strong>Father:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.Father || "Not provided"} ♂</p>
+              </div>
+            </div>
+            
+            <h4><strong>👩 Father's Side (Tamawahine)</strong></h4>
+            <div style="margin-left: 20px;">
+              <p><strong>Great-Great Grandmothers:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.FatherGreatGrandFatherWomen || "Not provided"} ♀</p>
+                <p>└── ${data?.FatherGreatGrandMotherWomen || "Not provided"} ♀</p>
+              </div>
+              <p><strong>Grandmother:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.FatherGrandMother || "Not provided"} ♀</p>
+              </div>
+            </div>
+
+            <h4><strong>👨 Mother's Side (Whaeamātāne)</strong></h4>
+            <div style="margin-left: 20px;">
+              <p><strong>Great-Great Grandfathers:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.MotherGreatGrandFatherMen || "Not provided"} ♂</p>
+                <p>└── ${data?.MotherGreatGrandMotherMen || "Not provided"} ♂</p>
+              </div>
+              <p><strong>Grandfather:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.MotherGrandFather || "Not provided"} ♂</p>
+              </div>
+            </div>
+            
+            <h4><strong>👩 Mother's Side (Whaeawahine)</strong></h4>
+            <div style="margin-left: 20px;">
+              <p><strong>Great-Great Grandmothers:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.MotherGreatGrandFatherWomen || "Not provided"} ♀</p>
+                <p>└── ${data?.MotherGreatGrandMotherWomen || "Not provided"} ♀</p>
+              </div>
+              <p><strong>Grandmother:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.MotherGrandMother || "Not provided"} ♀</p>
+              </div>
+              <p><strong>Mother:</strong></p>
+              <div style="margin-left: 20px;">
+                <p>└── ${data?.Mother || "Not provided"} ♀</p>
+              </div>
+            </div>
+          </div>
           
           ${
             data?.PersonalSpouce && data?.Spouse
               ? `
-          <h3><strong>Spouse/Partner Details</strong></h3>
+          <h3><strong>💒 Spouse/Partner Details</strong></h3>
           <p><strong>Spouse Name:</strong> ${data?.Spouse?.FirstName || "Not provided"} ${data?.Spouse?.LastName || "Not provided"}</p>
           <p><strong>Spouse Salutation:</strong> ${data?.Spouse?.Salutation || "Not provided"}</p>
           <p><strong>Spouse Gender:</strong> ${data?.Spouse?.Gender || "Not provided"}</p>
@@ -108,7 +155,17 @@ export default factories.createCoreController(
           <p><strong>Spouse Also Known As:</strong> ${data?.Spouse?.AlsoKnownAs || "Not provided"}</p>
           <p><strong>Spouse Iwi:</strong> ${data?.Spouse?.Iwi || "Not provided"}</p>
           `
-              : ""
+              : data?.PersonalSpouce 
+                ? `
+          <h3><strong>💒 Spouse/Partner Details</strong></h3>
+          <p><strong>⚠️ Spouse information not found in nested data.</strong></p>
+          <p><strong>Debug:</strong> Spouse data structure: ${JSON.stringify(data?.Spouse || "Not found", null, 2)}</p>
+          <p><strong>Note:</strong> Spouse might be stored as a different field name or nested differently.</p>
+          `
+                : `
+          <h3><strong>💒 Spouse/Partner Details</strong></h3>
+          <p><strong>No spouse indicated.</strong></p>
+          `
           }
           
           <h3><strong>Additional Information</strong></h3>
@@ -122,6 +179,8 @@ export default factories.createCoreController(
           <hr>
           <p><strong>DEBUG - Available Fields:</strong></p>
           <pre>${JSON.stringify(Object.keys(data || {}), null, 2)}</pre>
+          <p><strong>DEBUG - Full Data Structure:</strong></p>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
           
           <hr>
           <p><em>Please review this application in your Strapi admin panel.</em></p>
