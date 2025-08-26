@@ -46,24 +46,24 @@ export default factories.createCoreController(
           <h2>New Fishing Permit Application</h2>
           
           <h3><strong>Personal Details</strong></h3>
-          <p><strong>Applicant:</strong> ${data.attributes?.FirstName || "Not provided"} ${data.attributes?.LastName || "Not provided"}</p>
-          <p><strong>Email:</strong> ${data.attributes?.EmailAddress || "Not provided"}</p>
-          <p><strong>Phone:</strong> ${data.attributes?.PhoneNumber || "Not provided"}</p>
-          <p><strong>Street Address:</strong> ${data.attributes?.StreetAddress || "Not provided"}</p>
-          <p><strong>Applying Under Māori Rights:</strong> ${data.attributes?.ApplyingUnderMaoriRights ? "Yes" : "No"}</p>
-          <p><strong>Iwi Claim:</strong> ${data.attributes?.IwiClaim || "Not provided"}</p>
+          <p><strong>Applicant:</strong> ${data?.FirstName || "Not provided"} ${data?.LastName || "Not provided"}</p>
+          <p><strong>Email:</strong> ${data?.EmailAddress || "Not provided"}</p>
+          <p><strong>Phone:</strong> ${data?.PhoneNumber || "Not provided"}</p>
+          <p><strong>Street Address:</strong> ${data?.StreetAddress || "Not provided"}</p>
+          <p><strong>Applying Under Māori Rights:</strong> ${data?.ApplyingUnderMaoriRights ? "Yes" : "No"}</p>
+          <p><strong>Iwi Claim:</strong> ${data?.IwiClaim || "Not provided"}</p>
           
           <h3><strong>Fishing Purpose Details</strong></h3>
-          <p><strong>Purpose for Fishing:</strong> ${data.attributes?.PurposeForFishing ? "Yes" : "No"}</p>
-          <p><strong>Number Attending:</strong> ${data.attributes?.NumberAttending || "Not provided"}</p>
-          <p><strong>To be used at:</strong> ${data.attributes?.ToBeUsedAt || "Not provided"}</p>
-          <p><strong>To be used when:</strong> ${data.attributes?.ToBeUsedWhen || "Not provided"}</p>
-          <p><strong>Venue Contact Number:</strong> ${data.attributes?.VenueContactNumber || "Not provided"}</p>
+          <p><strong>Purpose for Fishing:</strong> ${data?.PurposeForFishing ? "Yes" : "No"}</p>
+          <p><strong>Number Attending:</strong> ${data?.NumberAttending || "Not provided"}</p>
+          <p><strong>To be used at:</strong> ${data?.ToBeUsedAt || "Not provided"}</p>
+          <p><strong>To be used when:</strong> ${data?.ToBeUsedWhen || "Not provided"}</p>
+          <p><strong>Venue Contact Number:</strong> ${data?.VenueContactNumber || "Not provided"}</p>
           
           <h3><strong>Species Information</strong></h3>
           ${
-            data.attributes?.Species && Array.isArray(data.attributes.Species)
-              ? data.attributes.Species.map(
+            data?.Species && Array.isArray(data.Species)
+              ? data.Species.map(
                   (species, index) => `
             <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
               <h4><strong>Species ${index + 1}</strong></h4>
@@ -84,13 +84,13 @@ export default factories.createCoreController(
           
           <hr>
           <p><strong>DEBUG - Available Fields:</strong></p>
-          <pre>${JSON.stringify(Object.keys(data.attributes || {}), null, 2)}</pre>
-          <pre>${JSON.stringify(data.attributes, null, 2)}</pre>
+          <pre>${JSON.stringify(Object.keys(data || {}), null, 2)}</pre>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
           
           <hr>
           <p><em>Please review this fishing permit application in your Strapi admin panel.</em></p>
         `,
-          text: `New fishing permit application from ${data.attributes?.FirstName} ${data.attributes?.LastName} (${data.attributes?.EmailAddress})`,
+          text: `New fishing permit application from ${data?.FirstName} ${data?.LastName} (${data?.EmailAddress})`,
         });
 
         console.log("✅ Fishing permit notification email sent successfully");
