@@ -3,7 +3,6 @@
  */
 
 import { factories } from "@strapi/strapi";
-import { sendEmail } from "../../../services/email";
 
 export default factories.createCoreController(
   "api::matai-whetu-application.matai-whetu-application",
@@ -16,8 +15,9 @@ export default factories.createCoreController(
       try {
         const data = response.data;
 
-        await sendEmail({
-          to: process.env.SMTP_DEFAULT_FROM || 'tristanngatimaru@gmail.com',
+        // Use Strapi Cloud's built-in email service
+        await strapi.plugins["email"].services.email.send({
+          to: 'tristanngatimaru@gmail.com', // Send to admin
           subject: "🏛️ New Matai Whetu Booking Application",
           html: `
           <h2>New Matai Whetu Booking Application</h2>
