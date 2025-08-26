@@ -8,35 +8,12 @@ export default factories.createCoreController(
   "api::matai-whetu-application.matai-whetu-application",
   ({ strapi }) => ({
     async create(ctx) {
-      // Debug the incoming request
-      console.log("🔍 Matai Whetu Raw request body:", JSON.stringify(ctx.request.body, null, 2));
-      console.log("🔍 Matai Whetu Request method:", ctx.request.method);
-      console.log("🔍 Matai Whetu Request headers:", JSON.stringify(ctx.request.headers, null, 2));
-
       // Call the default create method
       const response = await super.create(ctx);
 
       // Send notification email after successful creation
       try {
         const data = response.data;
-
-        // Debug logging to see what data we're getting
-        console.log(
-          "📧 Matai Whetu Full response data:",
-          JSON.stringify(response, null, 2)
-        );
-        console.log(
-          "📧 Matai Whetu Data attributes:",
-          JSON.stringify(data.attributes, null, 2)
-        );
-        console.log(
-          "📧 Matai Whetu Response data keys:",
-          Object.keys(response)
-        );
-        console.log(
-          "📧 Matai Whetu Data keys:",
-          Object.keys(data)
-        );
 
         // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
@@ -82,11 +59,6 @@ export default factories.createCoreController(
           <hr>
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
           <p><strong>Application ID:</strong> ${data.id}</p>
-          
-          <hr>
-          <p><strong>DEBUG - Available Fields:</strong></p>
-          <pre>${JSON.stringify(Object.keys(data || {}), null, 2)}</pre>
-          <pre>${JSON.stringify(data, null, 2)}</pre>
           
           <hr>
           <p><em>Please review this booking application in your Strapi admin panel.</em></p>

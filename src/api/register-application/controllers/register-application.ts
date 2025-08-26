@@ -9,42 +9,18 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async create(ctx) {
       // Debug the incoming request
-        console.log("🔍 Raw request body:", JSON.stringify(ctx.request.body, null, 2));
-        console.log("🔍 Request method:", ctx.request.method);
-        console.log("🔍 Request headers:", JSON.stringify(ctx.request.headers, null, 2));
+      // Call the default create method first
+      const response = await super.create(ctx);
 
-        // Let's also check if there are any relations or components we need to populate
-        const result = await strapi.entityService.create("api::register-application.register-application", {
-          data: ctx.request.body.data,
-          populate: "*", // This should populate any nested components or relations
-        });
+      // Get populated data for nested components
+      const result = await strapi.entityService.create("api::register-application.register-application", {
+        data: ctx.request.body.data,
+        populate: "*",
+      });
 
-        console.log("📧 Registration Full response data with population:", JSON.stringify(result, null, 2));
-        
-        // Call the default create method
-        const response = await super.create(ctx);
-
-        // Send notification email after successful creation
-        try {
-          const data = result as any; // Use populated result for nested components
-
-          // Debug logging to see what data we're getting
-          console.log(
-            "📧 Full response data:",
-            JSON.stringify(response, null, 2)
-          );
-          console.log(
-            "📧 Data populated:",
-            JSON.stringify(data, null, 2)
-          );
-          console.log(
-            "📧 Response data keys:",
-            Object.keys(response)
-          );
-          console.log(
-            "📧 Data keys:",
-            Object.keys(data)
-          );        // Use Strapi Cloud's built-in email service
+      // Send notification email after successful creation
+      try {
+        const data = result as any;        // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
           to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎯 New Register Application Received",
@@ -80,66 +56,97 @@ export default factories.createCoreController(
           <p><strong>Other Marae:</strong> ${data?.OtherMarae || "Not provided"}</p>
           <p><strong>Descendant Affiliation:</strong> ${data?.DecendantAffiliation || "Not provided"}</p>
           
-          <h3><strong>🌳 Family Tree (Whakatauki)</strong></h3>
-          <div style="font-family: monospace; background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
+          <h3><strong>🌳 Whakatauki (Family Tree)</strong></h3>
+          
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
             <h4><strong>👨 Father's Side (Tamatāne)</strong></h4>
-            <div style="margin-left: 20px;">
-              <p><strong>Great-Great Grandfathers:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.FatherGreatGrandFatherMen || "Not provided"} ♂</p>
-                <p>└── ${data?.FatherGreatGrandMotherMen || "Not provided"} ♂</p>
-              </div>
-              <p><strong>Great Grandfathers:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.FatherGrandFather || "Not provided"} ♂</p>
-              </div>
-              <p><strong>Father:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.Father || "Not provided"} ♂</p>
-              </div>
-            </div>
             
-            <h4><strong>👩 Father's Side (Tamawahine)</strong></h4>
-            <div style="margin-left: 20px;">
-              <p><strong>Great-Great Grandmothers:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.FatherGreatGrandFatherWomen || "Not provided"} ♀</p>
-                <p>└── ${data?.FatherGreatGrandMotherWomen || "Not provided"} ♀</p>
-              </div>
-              <p><strong>Grandmother:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.FatherGrandMother || "Not provided"} ♀</p>
-              </div>
-            </div>
+            <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+              <tr style="background-color: #e3f2fd;">
+                <td colspan="4" style="text-align: center; padding: 10px; font-weight: bold; border: 1px solid #ddd;">
+                  Grandfather's Side
+                </td>
+              </tr>
+              <tr style="background-color: #f5f5f5;">
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandfather:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.FatherGreatGrandFatherMen || "Not provided"}</td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandmother:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.FatherGreatGrandMotherMen || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                  <strong>Grandfather:</strong> ${data?.FatherGrandFather || "Not provided"}
+                </td>
+              </tr>
+            </table>
 
-            <h4><strong>👨 Mother's Side (Whaeamātāne)</strong></h4>
-            <div style="margin-left: 20px;">
-              <p><strong>Great-Great Grandfathers:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.MotherGreatGrandFatherMen || "Not provided"} ♂</p>
-                <p>└── ${data?.MotherGreatGrandMotherMen || "Not provided"} ♂</p>
-              </div>
-              <p><strong>Grandfather:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.MotherGrandFather || "Not provided"} ♂</p>
-              </div>
+            <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+              <tr style="background-color: #fce4ec;">
+                <td colspan="4" style="text-align: center; padding: 10px; font-weight: bold; border: 1px solid #ddd;">
+                  Grandmother's Side
+                </td>
+              </tr>
+              <tr style="background-color: #f5f5f5;">
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandfather:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.FatherGreatGrandFatherWomen || "Not provided"}</td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandmother:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.FatherGreatGrandMotherWomen || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                  <strong>Grandmother:</strong> ${data?.FatherGrandMother || "Not provided"}
+                </td>
+              </tr>
+            </table>
+
+            <div style="text-align: center; padding: 15px; background-color: #e8f5e8; border: 2px solid #4caf50; border-radius: 5px; margin: 10px 0;">
+              <strong style="font-size: 18px;">👨 FATHER: ${data?.Father || "Not provided"}</strong>
             </div>
+          </div>
+
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
+            <h4><strong>� Mother's Side (Tamawahine)</strong></h4>
             
-            <h4><strong>👩 Mother's Side (Whaeawahine)</strong></h4>
-            <div style="margin-left: 20px;">
-              <p><strong>Great-Great Grandmothers:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.MotherGreatGrandFatherWomen || "Not provided"} ♀</p>
-                <p>└── ${data?.MotherGreatGrandMotherWomen || "Not provided"} ♀</p>
-              </div>
-              <p><strong>Grandmother:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.MotherGrandMother || "Not provided"} ♀</p>
-              </div>
-              <p><strong>Mother:</strong></p>
-              <div style="margin-left: 20px;">
-                <p>└── ${data?.Mother || "Not provided"} ♀</p>
-              </div>
+            <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+              <tr style="background-color: #e3f2fd;">
+                <td colspan="4" style="text-align: center; padding: 10px; font-weight: bold; border: 1px solid #ddd;">
+                  Grandfather's Side
+                </td>
+              </tr>
+              <tr style="background-color: #f5f5f5;">
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandfather:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.MotherGreatGrandFatherMen || "Not provided"}</td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandmother:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.MotherGreatGrandMotherMen || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                  <strong>Grandfather:</strong> ${data?.MotherGrandFather || "Not provided"}
+                </td>
+              </tr>
+            </table>
+
+            <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+              <tr style="background-color: #fce4ec;">
+                <td colspan="4" style="text-align: center; padding: 10px; font-weight: bold; border: 1px solid #ddd;">
+                  Grandmother's Side
+                </td>
+              </tr>
+              <tr style="background-color: #f5f5f5;">
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandfather:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.MotherGreatGrandFatherWomen || "Not provided"}</td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;"><strong>Great-Grandmother:</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd; width: 25%;">${data?.MotherGreatGrandMotherWomen || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                  <strong>Grandmother:</strong> ${data?.MotherGrandMother || "Not provided"}
+                </td>
+              </tr>
+            </table>
+
+            <div style="text-align: center; padding: 15px; background-color: #fff3e0; border: 2px solid #ff9800; border-radius: 5px; margin: 10px 0;">
+              <strong style="font-size: 18px;">👩 MOTHER: ${data?.Mother || "Not provided"}</strong>
             </div>
           </div>
           
@@ -158,9 +165,7 @@ export default factories.createCoreController(
               : data?.PersonalSpouce 
                 ? `
           <h3><strong>💒 Spouse/Partner Details</strong></h3>
-          <p><strong>⚠️ Spouse information not found in nested data.</strong></p>
-          <p><strong>Debug:</strong> Spouse data structure: ${JSON.stringify(data?.Spouse || "Not found", null, 2)}</p>
-          <p><strong>Note:</strong> Spouse might be stored as a different field name or nested differently.</p>
+          <p><strong>Has spouse indicated but details not available.</strong></p>
           `
                 : `
           <h3><strong>💒 Spouse/Partner Details</strong></h3>
@@ -175,12 +180,6 @@ export default factories.createCoreController(
           <hr>
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
           <p><strong>Application ID:</strong> ${data.id}</p>
-          
-          <hr>
-          <p><strong>DEBUG - Available Fields:</strong></p>
-          <pre>${JSON.stringify(Object.keys(data || {}), null, 2)}</pre>
-          <p><strong>DEBUG - Full Data Structure:</strong></p>
-          <pre>${JSON.stringify(data, null, 2)}</pre>
           
           <hr>
           <p><em>Please review this application in your Strapi admin panel.</em></p>
