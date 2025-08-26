@@ -8,6 +8,11 @@ export default factories.createCoreController(
   "api::register-application.register-application",
   ({ strapi }) => ({
     async create(ctx) {
+      // Debug the incoming request
+      console.log("🔍 Raw request body:", JSON.stringify(ctx.request.body, null, 2));
+      console.log("🔍 Request method:", ctx.request.method);
+      console.log("🔍 Request headers:", JSON.stringify(ctx.request.headers, null, 2));
+
       // Call the default create method
       const response = await super.create(ctx);
 
@@ -23,6 +28,14 @@ export default factories.createCoreController(
         console.log(
           "📧 Data attributes:",
           JSON.stringify(data.attributes, null, 2)
+        );
+        console.log(
+          "📧 Response data keys:",
+          Object.keys(response)
+        );
+        console.log(
+          "📧 Data keys:",
+          Object.keys(data)
         );
 
         // Use Strapi Cloud's built-in email service
