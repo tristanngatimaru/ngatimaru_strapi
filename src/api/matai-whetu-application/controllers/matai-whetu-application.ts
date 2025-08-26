@@ -17,7 +17,7 @@ export default factories.createCoreController(
 
         // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
-          to: 'tristanngatimaru@gmail.com', // Send to admin
+          to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🏛️ New Matai Whetu Booking Application",
           html: `
           <h2>New Matai Whetu Booking Application</h2>

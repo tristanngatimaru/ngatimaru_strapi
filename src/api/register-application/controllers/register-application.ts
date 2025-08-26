@@ -15,9 +15,13 @@ export default factories.createCoreController(
       try {
         const data = response.data;
 
+        // Debug logging to see what data we're getting
+        console.log('📧 Full response data:', JSON.stringify(response, null, 2));
+        console.log('📧 Data attributes:', JSON.stringify(data.attributes, null, 2));
+
         // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
-          to: 'tristanngatimaru@gmail.com', // Send to admin
+          to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎯 New Register Application Received",
           html: `
           <h2>New Registration Application</h2>
@@ -27,6 +31,10 @@ export default factories.createCoreController(
           <p><strong>Hapu:</strong> ${data.attributes?.PrincipleHapu || "Not provided"}</p>
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
           <p><strong>Application ID:</strong> ${data.id}</p>
+          
+          <hr>
+          <p><strong>DEBUG - Available Fields:</strong></p>
+          <pre>${JSON.stringify(Object.keys(data.attributes || {}), null, 2)}</pre>
           
           <hr>
           <p><em>Please review this application in your Strapi admin panel.</em></p>

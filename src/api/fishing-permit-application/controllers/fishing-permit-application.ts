@@ -17,14 +17,14 @@ export default factories.createCoreController(
 
         // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
-          to: 'tristanngatimaru@gmail.com', // Send to admin
+          to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎣 New Fishing Permit Application",
           html: `
           <h2>New Fishing Permit Application</h2>
           <p><strong>Applicant:</strong> ${data.attributes?.FirstName || "Not provided"} ${data.attributes?.LastName || "Not provided"}</p>
           <p><strong>Email:</strong> ${data.attributes?.EmailAddress || "Not provided"}</p>
           <p><strong>Phone:</strong> ${data.attributes?.PhoneNumber || "Not provided"}</p>
-          <p><strong>Applying Under Maori Rights:</strong> ${data.attributes?.ApplyingUnderMaoriRights ? 'Yes' : 'No'}</p>
+          <p><strong>Applying Under Maori Rights:</strong> ${data.attributes?.ApplyingUnderMaoriRights ? "Yes" : "No"}</p>
           <p><strong>Number Attending:</strong> ${data.attributes?.NumberAttending || "Not provided"}</p>
           <p><strong>Iwi Claim:</strong> ${data.attributes?.IwiClaim || "Not provided"}</p>
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
