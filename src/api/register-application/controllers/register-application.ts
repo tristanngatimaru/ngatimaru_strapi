@@ -13,14 +13,17 @@ export default factories.createCoreController(
       const response = await super.create(ctx);
 
       // Get populated data for nested components
-      const result = await strapi.entityService.create("api::register-application.register-application", {
-        data: ctx.request.body.data,
-        populate: "*",
-      });
+      const result = await strapi.entityService.create(
+        "api::register-application.register-application",
+        {
+          data: ctx.request.body.data,
+          populate: "*",
+        }
+      );
 
       // Send notification email after successful creation
       try {
-        const data = result as any;        // Use Strapi Cloud's built-in email service
+        const data = result as any; // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
           to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎯 New Register Application Received",
@@ -162,7 +165,7 @@ export default factories.createCoreController(
           <p><strong>Spouse Also Known As:</strong> ${data?.Spouse?.AlsoKnownAs || "Not provided"}</p>
           <p><strong>Spouse Iwi:</strong> ${data?.Spouse?.Iwi || "Not provided"}</p>
           `
-              : data?.PersonalSpouce 
+              : data?.PersonalSpouce
                 ? `
           <h3><strong>💒 Spouse/Partner Details</strong></h3>
           <p><strong>Has spouse indicated but details not available.</strong></p>
@@ -183,6 +186,46 @@ export default factories.createCoreController(
           
           <hr>
           <p><em>Please review this application in your Strapi admin panel.</em></p>
+          
+          <div style="margin-top: 40px; padding: 20px; border: 2px solid #333; background-color: #f9f9f9;">
+            <h3 style="text-align: center; margin-bottom: 30px;"><strong>📋 APPROVAL SECTION</strong></h3>
+            
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="width: 50%; padding: 15px; vertical-align: top;">
+                  <strong>Approved by:</strong><br>
+                  <div style="border-bottom: 2px solid #333; height: 40px; margin: 10px 0;"></div>
+                  <em>(Print Name)</em>
+                </td>
+                <td style="width: 50%; padding: 15px; vertical-align: top;">
+                  <strong>Position/Title:</strong><br>
+                  <div style="border-bottom: 2px solid #333; height: 40px; margin: 10px 0;"></div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 15px; vertical-align: top;">
+                  <strong>Signature:</strong><br>
+                  <div style="border-bottom: 2px solid #333; height: 50px; margin: 10px 0;"></div>
+                </td>
+                <td style="padding: 15px; vertical-align: top;">
+                  <strong>Date:</strong><br>
+                  <div style="border-bottom: 2px solid #333; height: 50px; margin: 10px 0;"></div>
+                </td>
+              </tr>
+            </table>
+            
+            <div style="margin-top: 20px; padding: 10px; background-color: #e3f2fd; border-left: 4px solid #2196f3;">
+              <strong>Status:</strong>
+              <div style="margin: 10px 0;">
+                ☐ Approved &nbsp;&nbsp;&nbsp; ☐ Rejected &nbsp;&nbsp;&nbsp; ☐ Requires Additional Information
+              </div>
+            </div>
+            
+            <div style="margin-top: 15px;">
+              <strong>Comments/Notes:</strong><br>
+              <div style="border: 1px solid #ccc; height: 60px; margin: 5px 0; background-color: white;"></div>
+            </div>
+          </div>
         `,
           text: `New Registration Application received from ${data?.PersonalFirstName} ${data?.PersonalLastName} (${data?.PersonalEmail})`,
         });
