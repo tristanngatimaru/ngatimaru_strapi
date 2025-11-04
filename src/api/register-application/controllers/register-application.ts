@@ -304,6 +304,7 @@ export default factories.createCoreController(
               <div style="border: 1px solid #ccc; height: 60px; margin: 5px 0; background-color: white;"></div>
             </div>
           </div>
+          </div>
         `,
           text: `New Registration Application received from ${data?.PersonalFirstName} ${data?.PersonalLastName} (${data?.PersonalEmail})`,
         });
