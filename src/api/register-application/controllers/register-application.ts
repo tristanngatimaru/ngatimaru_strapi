@@ -234,29 +234,70 @@ export default factories.createCoreController(
           ${
             data?.PersonalSpouce && data?.Spouse
               ? `
-          <h3><strong>💒 Spouse/Partner Details</strong></h3>
-          <p><strong>Spouse Name:</strong> ${data?.Spouse?.FirstName || "Not provided"} ${data?.Spouse?.LastName || "Not provided"}</p>
-          <p><strong>Spouse Salutation:</strong> ${data?.Spouse?.Salutation || "Not provided"}</p>
-          <p><strong>Spouse Gender:</strong> ${data?.Spouse?.Gender || "Not provided"}</p>
-          <p><strong>Spouse Date of Birth:</strong> ${data?.Spouse?.DateOfBirth || "Not provided"}</p>
-          <p><strong>Spouse Maiden Name:</strong> ${data?.Spouse?.MaidenName || "Not provided"}</p>
-          <p><strong>Spouse Also Known As:</strong> ${data?.Spouse?.AlsoKnownAs || "Not provided"}</p>
-          <p><strong>Spouse Iwi:</strong> ${data?.Spouse?.Iwi || "Not provided"}</p>
+            <h3 style="background-color: #e91e63; color: white; padding: 10px; margin: 20px 0 10px 0;">💒 Spouse/Partner Details</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">First Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.Spouse?.FirstName || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Last Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.Spouse?.LastName || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Salutation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Salutation || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Gender</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Gender || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Date of Birth</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.DateOfBirth || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Maiden Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.MaidenName || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Also Known As</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.AlsoKnownAs || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Iwi Affiliation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Iwi || "Not provided"}</td>
+              </tr>
+            </table>
           `
               : data?.PersonalSpouce
                 ? `
-          <h3><strong>💒 Spouse/Partner Details</strong></h3>
-          <p><strong>Has spouse indicated but details not available.</strong></p>
+            <h3 style="background-color: #e91e63; color: white; padding: 10px; margin: 20px 0 10px 0;">💒 Spouse/Partner Details</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #fff3cd;">
+                <td style="padding: 12px; border: 1px solid #ddd; text-align: center; font-weight: bold; color: #856404;">
+                  ⚠️ Spouse indicated but detailed information not provided
+                </td>
+              </tr>
+            </table>
           `
                 : `
-          <h3><strong>💒 Spouse/Partner Details</strong></h3>
-          <p><strong>No spouse indicated.</strong></p>
+            <h3 style="background-color: #6c757d; color: white; padding: 10px; margin: 20px 0 10px 0;">💒 Spouse/Partner Details</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; text-align: center; font-weight: bold; color: #6c757d;">
+                  No spouse or partner indicated
+                </td>
+              </tr>
+            </table>
           `
           }
           
-          <h3><strong>Additional Information</strong></h3>
-          <p><strong>Additional Comments:</strong> ${data?.AdditionalInformation || "Not provided"}</p>
-          <p><strong>Agreed to Terms:</strong> ${data?.AgreeToTerms ? "Yes" : "No"}</p>
+          <h3 style="background-color: #17a2b8; color: white; padding: 10px; margin: 20px 0 10px 0;">📝 Additional Information</h3>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+            <tr style="background-color: #f8f9fa;">
+              <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Additional Comments</td>
+              <td style="padding: 12px; border: 1px solid #ddd; width: 75%;">${data?.AdditionalInformation || "Not provided"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Agreed to Terms</td>
+              <td style="padding: 12px; border: 1px solid #ddd; color: ${data?.AgreeToTerms ? "#27ae60" : "#e74c3c"}; font-weight: bold;">
+                ${data?.AgreeToTerms ? "✓ Yes - Terms Accepted" : "✗ Terms Not Accepted"}
+              </td>
+            </tr>
+          </table>
           
           <hr>
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
@@ -301,7 +342,7 @@ export default factories.createCoreController(
             
             <div style="margin-top: 15px;">
               <strong>Comments/Notes:</strong><br>
-              <div style="border: 1px solid #ccc; height: 60px; margin: 5px 0; background-color: white;"></div>
+              <div style="border: 1px solid #ccc; height: 600px; margin: 5px 0; background-color: white;"></div>
             </div>
           </div>
           </div>
