@@ -232,33 +232,33 @@ export default factories.createCoreController(
           </div>
           
           ${
-            data?.PersonalSpouce && data?.Spouse
+            data?.PersonalSpouce
               ? `
             <h3 style="background-color: #e91e63; color: white; padding: 10px; margin: 20px 0 10px 0;">💒 Spouse/Partner Details</h3>
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
               <tr style="background-color: #f8f9fa;">
                 <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">First Name</td>
-                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.Spouse?.FirstName || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.Spouse?.FirstName || data?.SpouseFirstName || "Not provided"}</td>
                 <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Last Name</td>
-                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.Spouse?.LastName || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.Spouse?.LastName || data?.SpouseLastName || "Not provided"}</td>
               </tr>
               <tr>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Salutation</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Salutation || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Salutation || data?.SpouseSalutation || "Not provided"}</td>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Gender</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Gender || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Gender || data?.SpouseGender || "Not provided"}</td>
               </tr>
               <tr style="background-color: #f8f9fa;">
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Date of Birth</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.DateOfBirth || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.DateOfBirth || data?.SpouseDateOfBirth || "Not provided"}</td>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Maiden Name</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.MaidenName || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.MaidenName || data?.SpouseMaidenName || "Not provided"}</td>
               </tr>
               <tr>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Also Known As</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.AlsoKnownAs || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.AlsoKnownAs || data?.SpouseAlsoKnownAs || "Not provided"}</td>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Iwi Affiliation</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Iwi || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.Spouse?.Iwi || data?.SpouseIwi || "Not provided"}</td>
               </tr>
             </table>
           `
