@@ -28,36 +28,114 @@ export default factories.createCoreController(
           to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎯 New Register Application Received",
           html: `
-          <h2>New Registration Application</h2>
-          
-          <h3><strong>Personal Information</strong></h3>
-          <p><strong>Name:</strong> ${data?.PersonalFirstName || "Not provided"} ${data?.PersonalLastName || "Not provided"}</p>
-          <p><strong>Salutation:</strong> ${data?.PersonalSalutaion || "Not provided"}</p>
-          <p><strong>Gender:</strong> ${data?.PersonalGender || "Not provided"}</p>
-          <p><strong>Birth Date:</strong> ${data?.PersonalBirthDate || "Not provided"}</p>
-          <p><strong>Maiden Name:</strong> ${data?.PersonalMaidenName || "Not provided"}</p>
-          <p><strong>Also Known As:</strong> ${data?.PersonalAKA || "Not provided"}</p>
-          <p><strong>Occupation:</strong> ${data?.PersonalOccupation || "Not provided"}</p>
-          <p><strong>Has Spouse:</strong> ${data?.PersonalSpouce ? "Yes" : "No"}</p>
-          
-          <h3><strong>Contact Information</strong></h3>
-          <p><strong>Email:</strong> ${data?.PersonalEmail || "Not provided"}</p>
-          <p><strong>Home Phone:</strong> ${data?.PersonalHomePhone || "Not provided"}</p>
-          <p><strong>Work Phone:</strong> ${data?.PersonalWorkPhone || "Not provided"}</p>
-          <p><strong>Mobile Phone:</strong> ${data?.PersonalMobilePhone || "Not provided"}</p>
-          <p><strong>Contact Details:</strong> ${data?.PersonalContactDetails || "Not provided"}</p>
-          <p><strong>Postal Address:</strong> ${data?.PersonalPostalAddress || "Not provided"}</p>
-          <p><strong>Has Different Postal Address:</strong> ${data?.PostalAddress ? "Yes" : "No"}</p>
-          ${data?.PostalAddress ? `<p><strong>Postal Address Details:</strong> ${data?.PostalAddressYes || "Not provided"}</p>` : ""}
-          
-          <h3><strong>Hapū & Iwi Information</strong></h3>
-          <p><strong>Principal Hapū:</strong> ${data?.PrincipleHapu || "Not provided"}</p>
-          <p><strong>Principal Other Iwi Affiliation:</strong> ${data?.PrincipleOtherIwiAffiliation || "Not provided"}</p>
-          <p><strong>Principal Marae:</strong> ${data?.PrincipleMarae || "Not provided"}</p>
-          <p><strong>Other Hapū:</strong> ${data?.OtherHapu || "Not provided"}</p>
-          <p><strong>Other Iwi Affiliation:</strong> ${data?.OtherIwiAffiliation || "Not provided"}</p>
-          <p><strong>Other Marae:</strong> ${data?.OtherMarae || "Not provided"}</p>
-          <p><strong>Descendant Affiliation:</strong> ${data?.DecendantAffiliation || "Not provided"}</p>
+          <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+            <h2 style="text-align: center; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px;">
+              🎯 New Registration Application
+            </h2>
+            
+            <h3 style="background-color: #3498db; color: white; padding: 10px; margin: 20px 0 10px 0;">📋 Personal Information</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">First Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.PersonalFirstName || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Last Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.PersonalLastName || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Salutation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalSalutaion || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Gender</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalGender || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Birth Date</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalBirthDate || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Maiden Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalMaidenName || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Also Known As</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalAKA || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Occupation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalOccupation || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Has Spouse</td>
+                <td style="padding: 12px; border: 1px solid #ddd; color: ${data?.PersonalSpouce ? "#27ae60" : "#e74c3c"}; font-weight: bold;">${data?.PersonalSpouce ? "✓ Yes" : "✗ No"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;"></td>
+                <td style="padding: 12px; border: 1px solid #ddd;"></td>
+              </tr>
+            </table>
+            
+            <h3 style="background-color: #e67e22; color: white; padding: 10px; margin: 20px 0 10px 0;">📞 Contact Information</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Email</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 75%;">${data?.PersonalEmail || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Home Phone</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalHomePhone || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Work Phone</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalWorkPhone || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Mobile Phone</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalMobilePhone || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Contact Details</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalContactDetails || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Postal Address</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PersonalPostalAddress || "Not provided"}</td>
+              </tr>
+              ${
+                data?.PostalAddress
+                  ? `
+              <tr style="background-color: #fff3cd;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Alternative Postal Address</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PostalAddressYes || "Not provided"}</td>
+              </tr>
+              `
+                  : ""
+              }
+            </table>
+            
+            <h3 style="background-color: #8e44ad; color: white; padding: 10px; margin: 20px 0 10px 0;">🏔️ Hapū & Iwi Information</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; width: 50%; font-weight: bold;">Principal Hapū</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 50%;">${data?.PrincipleHapu || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Principal Other Iwi Affiliation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PrincipleOtherIwiAffiliation || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Principal Marae</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PrincipleMarae || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Other Hapū</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.OtherHapu || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Other Iwi Affiliation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.OtherIwiAffiliation || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Other Marae</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.OtherMarae || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Descendant Affiliation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.DecendantAffiliation || "Not provided"}</td>
+              </tr>
+            </table>
           
           <h3><strong>🌳 Whakatauki (Family Tree)</strong></h3>
           
