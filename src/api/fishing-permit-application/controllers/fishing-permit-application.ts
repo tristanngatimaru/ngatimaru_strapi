@@ -158,8 +158,14 @@ export default factories.createCoreController(
                       <td style="padding: 12px; border: 1px solid #ddd;">${species?.AreaLanded || "Not provided"}</td>
                     </tr>
                     <tr style="background-color: #f8f9fa;">
-                      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Amount Requested</td>
-                      <td colspan="3" style="padding: 12px; border: 1px solid #ddd; font-weight: bold; color: #e67e22;">${species?.AmountRequested || "Not provided"}</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Amount Requested</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold; color: #e67e22;">${species?.AmountRequested || "Not provided"}</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold; background-color: #fff3cd; color: #856404;">Amount Approved</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; background-color: #fff3cd; min-height: 40px;">
+                        <div style="border: 1px solid #ccc; min-height: 30px; padding: 5px; background-color: #fff;">
+                          &nbsp;
+                        </div>
+                      </td>
                     </tr>
                   </table>
                   `
@@ -173,42 +179,7 @@ export default factories.createCoreController(
                   </table>`
             }
             
-            <h3 style="background-color: #dc3545; color: white; padding: 10px; margin: 30px 0 10px 0;">📋 Permit Approval</h3>
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; border: 2px solid #dc3545;">
-              <tr style="background-color: #f8d7da;">
-                <td style="padding: 15px; text-align: center; font-weight: bold; font-size: 16px;">
-                  This section is for official use only
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 20px;">
-                  <table style="width: 100%; border-collapse: collapse;">
-                    <tr>
-                      <td style="width: 50%; padding: 15px; border: 1px solid #ccc;">
-                        <strong>Permit Status:</strong><br><br>
-                        ☐ Approved &nbsp;&nbsp;&nbsp; ☐ Declined &nbsp;&nbsp;&nbsp; ☐ Pending Review<br><br>
-                        <strong>Permit Number:</strong><br>
-                        <div style="border: 1px solid #ccc; min-height: 30px; padding: 5px; margin-top: 5px; background-color: #fff;">
-                          &nbsp;
-                        </div><br>
-                        <strong>Conditions/Comments:</strong><br>
-                        <div style="border: 1px solid #ccc; min-height: 60px; padding: 10px; margin-top: 10px; background-color: #fff;">
-                          &nbsp;
-                        </div>
-                      </td>
-                      <td style="width: 50%; padding: 15px; border: 1px solid #ccc;">
-                        <strong>Approved By:</strong><br><br>
-                        Name: ________________________________<br><br>
-                        Position: _____________________________<br><br>
-                        Signature: ____________________________<br><br>
-                        Date: _________________________________
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </div>
+            
           
           <hr>
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
