@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-11-05T20:58:41.095Z"
+    "x-generation-date": "2025-11-05T22:02:53.220Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -10535,8 +10535,8 @@
               "StreetAddress": {
                 "type": "string"
               },
-              "PurposeForFishing": {
-                "type": "boolean"
+              "PurposeForHui": {
+                "type": "string"
               },
               "NumberAttending": {
                 "type": "string"
@@ -10654,8 +10654,8 @@
           "StreetAddress": {
             "type": "string"
           },
-          "PurposeForFishing": {
-            "type": "boolean"
+          "PurposeForHui": {
+            "type": "string"
           },
           "NumberAttending": {
             "type": "string"
@@ -11008,8 +11008,8 @@
                 "StreetAddress": {
                   "type": "string"
                 },
-                "PurposeForFishing": {
-                  "type": "boolean"
+                "PurposeForHui": {
+                  "type": "string"
                 },
                 "NumberAttending": {
                   "type": "string"
