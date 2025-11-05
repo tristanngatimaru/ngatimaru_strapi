@@ -68,7 +68,7 @@ export default factories.createCoreController(
                 </td>
               </tr>
               <tr>
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Iwi Claim Details</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">What Iwi are you claiming under?</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.IwiClaim || "Not provided"}</td>
               </tr>
             </table>
@@ -86,9 +86,9 @@ export default factories.createCoreController(
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.NumberAttending || "Not provided"}</td>
               </tr>
               <tr>
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">To be used at</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">To be used at (Address)</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.ToBeUsedAt || "Not provided"}</td>
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">To be used when</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Date of Hui</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.ToBeUsedWhen || "Not provided"}</td>
               </tr>
               <tr style="background-color: #f8f9fa;">
@@ -156,6 +156,10 @@ export default factories.createCoreController(
                       <td style="padding: 12px; border: 1px solid #ddd;">${species?.AreaTaken || "Not provided"}</td>
                       <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Area Landed</td>
                       <td style="padding: 12px; border: 1px solid #ddd;">${species?.AreaLanded || "Not provided"}</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Amount Requested</td>
+                      <td colspan="3" style="padding: 12px; border: 1px solid #ddd; font-weight: bold; color: #e67e22;">${species?.AmountRequested || "Not provided"}</td>
                     </tr>
                   </table>
                   `

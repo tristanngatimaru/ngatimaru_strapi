@@ -25,6 +25,9 @@
     },
     "AreaLanded": {
       "type": "text"
+    },
+    "AmountRequested": {
+      "type": "integer"
     }
   },
   "config": {}

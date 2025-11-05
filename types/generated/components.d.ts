@@ -155,6 +155,7 @@ export interface SharedSpecies extends Struct.ComponentSchema {
     displayName: 'Species';
   };
   attributes: {
+    AmountRequested: Schema.Attribute.Integer;
     AreaLanded: Schema.Attribute.Text;
     AreaTaken: Schema.Attribute.Text;
     HarvestMethodDrop: Schema.Attribute.Enumeration<
