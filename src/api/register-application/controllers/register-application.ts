@@ -303,9 +303,7 @@ export default factories.createCoreController(
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
           <p><strong>Application ID:</strong> ${data.id}</p>
           
-          <hr>
-          <p><em>Please review this application in your Strapi admin panel.</em></p>
-          
+          <hr>       
           <div style="margin-top: 40px; padding: 20px; border: 2px solid #333; background-color: #f9f9f9;">
             <h3 style="text-align: center; margin-bottom: 30px;"><strong>📋 APPROVAL SECTION</strong></h3>
             

@@ -13,52 +13,159 @@ export default factories.createCoreController(
       const response = await super.create(ctx);
 
       // Get populated data for nested components
-      const result = await strapi.entityService.create("api::fishing-permit-application.fishing-permit-application", {
-        data: ctx.request.body.data,
-        populate: "*",
-      });
+      const result = await strapi.entityService.create(
+        "api::fishing-permit-application.fishing-permit-application",
+        {
+          data: ctx.request.body.data,
+          populate: "*",
+        }
+      );
 
       // Send notification email after successful creation
       try {
-        const data = result as any;        // Use Strapi Cloud's built-in email service
+        const data = result as any; // Use Strapi Cloud's built-in email service
         await strapi.plugins["email"].services.email.send({
           to: "tristanngatimaru@gmail.com", // Send to admin
           subject: "🎣 New Fishing Permit Application",
           html: `
-          <h2>New Fishing Permit Application</h2>
-          
-          <h3><strong>Personal Details</strong></h3>
-          <p><strong>Applicant:</strong> ${data?.FirstName || "Not provided"} ${data?.LastName || "Not provided"}</p>
-          <p><strong>Email:</strong> ${data?.EmailAddress || "Not provided"}</p>
-          <p><strong>Phone:</strong> ${data?.PhoneNumber || "Not provided"}</p>
-          <p><strong>Street Address:</strong> ${data?.StreetAddress || "Not provided"}</p>
-          <p><strong>Applying Under Māori Rights:</strong> ${data?.ApplyingUnderMaoriRights ? "Yes" : "No"}</p>
-          <p><strong>Iwi Claim:</strong> ${data?.IwiClaim || "Not provided"}</p>
-          
-          <h3><strong>Fishing Purpose Details</strong></h3>
-          <p><strong>Purpose for Fishing:</strong> ${data?.PurposeForFishing ? "Yes" : "No"}</p>
-          <p><strong>Number Attending:</strong> ${data?.NumberAttending || "Not provided"}</p>
-          <p><strong>To be used at:</strong> ${data?.ToBeUsedAt || "Not provided"}</p>
-          <p><strong>To be used when:</strong> ${data?.ToBeUsedWhen || "Not provided"}</p>
-          <p><strong>Venue Contact Number:</strong> ${data?.VenueContactNumber || "Not provided"}</p>
-          
-          <h3><strong>Species Information</strong></h3>
-          ${
-            data?.Species && Array.isArray(data.Species) && data.Species.length > 0
-              ? data.Species.map(
-                  (species: any, index: number) => `
-            <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-              <h4><strong>Species ${index + 1}</strong></h4>
-              <p><strong>Species Name:</strong> ${species?.SpeciesName || "Not provided"}</p>
-              <p><strong>Harvest Method:</strong> ${species?.HarvestMethod || "Not provided"}</p>
-              <p><strong>Area Taken:</strong> ${species?.AreaTaken || "Not provided"}</p>
-              <p><strong>Area Landed:</strong> ${species?.AreaLanded || "Not provided"}</p>
-              <p><strong>Time of Harvest:</strong> ${species?.TimeOfHarves ? new Date(species.TimeOfHarves).toLocaleString() : "Not provided"}</p>
-            </div>
-            `
-                ).join("")
-              : "<p>No species information provided</p>"
-          }
+          <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+            <h2 style="text-align: center; color: #2c3e50; border-bottom: 3px solid #f39c12; padding-bottom: 10px;">
+              🎣 New Fishing Permit Application
+            </h2>
+            
+            <h3 style="background-color: #3498db; color: white; padding: 10px; margin: 20px 0 10px 0;">👤 Personal Details</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">First Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.FirstName || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Last Name</td>
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${data?.LastName || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Email</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.EmailAddress || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Phone</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PhoneNumber || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Street Address</td>
+                <td colspan="3" style="padding: 12px; border: 1px solid #ddd;">${data?.StreetAddress || "Not provided"}</td>
+              </tr>
+            </table>
+            
+            <h3 style="background-color: #e67e22; color: white; padding: 10px; margin: 20px 0 10px 0;">🏛️ Māori Rights & Claims</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; width: 40%; font-weight: bold;">Applying Under Māori Rights</td>
+                <td style="padding: 12px; border: 1px solid #ddd; color: ${data?.ApplyingUnderMaoriRights ? "#27ae60" : "#e74c3c"}; font-weight: bold;">
+                  ${data?.ApplyingUnderMaoriRights ? "✅ Yes" : "❌ No"}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Iwi Claim Details</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.IwiClaim || "Not provided"}</td>
+              </tr>
+            </table>
+            
+            <h3 style="background-color: #8e44ad; color: white; padding: 10px; margin: 20px 0 10px 0;">🎯 Fishing Purpose Details</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Purpose for Fishing</td>
+                <td style="padding: 12px; border: 1px solid #ddd; color: ${data?.PurposeForFishing ? "#27ae60" : "#e74c3c"}; font-weight: bold;">
+                  ${data?.PurposeForFishing ? "✅ Yes" : "❌ No"}
+                </td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Number Attending</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.NumberAttending || "Not provided"}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">To be used at</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.ToBeUsedAt || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">To be used when</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.ToBeUsedWhen || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Venue Contact Number</td>
+                <td colspan="3" style="padding: 12px; border: 1px solid #ddd;">${data?.VenueContactNumber || "Not provided"}</td>
+              </tr>
+            </table>
+            
+            <h3 style="background-color: #27ae60; color: white; padding: 10px; margin: 20px 0 10px 0;">🐟 Species Information</h3>
+            ${
+              data?.Species &&
+              Array.isArray(data.Species) &&
+              data.Species.length > 0
+                ? data.Species.map(
+                    (species: any, index: number) => `
+                  <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; border: 2px solid #27ae60;">
+                    <tr style="background-color: #d5f4e6;">
+                      <td colspan="4" style="text-align: center; padding: 12px; font-weight: bold; font-size: 16px;">
+                        🐟 Species ${index + 1}
+                      </td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Species Name</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${species?.SpeciesName || "Not provided"}</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Harvest Method</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${species?.HarvestMethod || "Not provided"}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Area Taken</td>
+                      <td style="padding: 12px; border: 1px solid #ddd;">${species?.AreaTaken || "Not provided"}</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Area Landed</td>
+                      <td style="padding: 12px; border: 1px solid #ddd;">${species?.AreaLanded || "Not provided"}</td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Time of Harvest</td>
+                      <td colspan="3" style="padding: 12px; border: 1px solid #ddd;">${species?.TimeOfHarves ? new Date(species.TimeOfHarves).toLocaleString() : "Not provided"}</td>
+                    </tr>
+                  </table>
+                  `
+                  ).join("")
+                : `<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+                    <tr style="background-color: #f8d7da; color: #721c24;">
+                      <td style="padding: 15px; text-align: center; font-weight: bold;">
+                        ⚠️ No species information provided in this application
+                      </td>
+                    </tr>
+                  </table>`
+            }
+            
+            <h3 style="background-color: #dc3545; color: white; padding: 10px; margin: 30px 0 10px 0;">📋 Permit Approval</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; border: 2px solid #dc3545;">
+              <tr style="background-color: #f8d7da;">
+                <td style="padding: 15px; text-align: center; font-weight: bold; font-size: 16px;">
+                  This section is for official use only
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 20px;">
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                      <td style="width: 50%; padding: 15px; border: 1px solid #ccc;">
+                        <strong>Permit Status:</strong><br><br>
+                        ☐ Approved &nbsp;&nbsp;&nbsp; ☐ Declined &nbsp;&nbsp;&nbsp; ☐ Pending Review<br><br>
+                        <strong>Permit Number:</strong><br>
+                        <div style="border: 1px solid #ccc; min-height: 30px; padding: 5px; margin-top: 5px; background-color: #fff;">
+                          &nbsp;
+                        </div><br>
+                        <strong>Conditions/Comments:</strong><br>
+                        <div style="border: 1px solid #ccc; min-height: 60px; padding: 10px; margin-top: 10px; background-color: #fff;">
+                          &nbsp;
+                        </div>
+                      </td>
+                      <td style="width: 50%; padding: 15px; border: 1px solid #ccc;">
+                        <strong>Approved By:</strong><br><br>
+                        Name: ________________________________<br><br>
+                        Position: _____________________________<br><br>
+                        Signature: ____________________________<br><br>
+                        Date: _________________________________
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
           
           <hr>
           <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
