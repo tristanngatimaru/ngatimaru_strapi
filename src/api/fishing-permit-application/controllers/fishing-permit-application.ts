@@ -3,34 +3,40 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { sendEmail } from "../../../services/email";
 
 export default factories.createCoreController(
   "api::fishing-permit-application.fishing-permit-application",
   ({ strapi }) => ({
     async create(ctx) {
-      // Debug the incoming request
       // Call the default create method first
       const response = await super.create(ctx);
 
-      // Get populated data for nested components
-      const result = await strapi.entityService.create(
-        "api::fishing-permit-application.fishing-permit-application",
-        {
-          data: ctx.request.body.data,
-          populate: "*",
-        }
-      );
-
-      // Send notification email after successful creation
       try {
-        const data = result as any; // Use Strapi Cloud's built-in email service
-        await strapi.plugins["email"].services.email.send({
+        console.log("✅ Fishing permit application created:", response.data.id);
+
+        // Get the created data with populated fields
+        const result = await strapi.entityService.findOne(
+          "api::fishing-permit-application.fishing-permit-application",
+          response.data.id,
+          {
+            populate: "*",
+          }
+        );
+
+        console.log("📧 Preparing to send notification email...");
+
+        // Send notification email after successful creation
+        const data = result as any;
+
+        // Use the custom email service
+        await sendEmail({
           to: "tristanngatimaru@gmail.com", // Send to admin
-          subject: "🎣 New Fishing Permit Application",
+          subject: "Fishing Permit Application",
           html: `
           <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
             <h2 style="text-align: center; color: #2c3e50; border-bottom: 3px solid #f39c12; padding-bottom: 10px;">
-              🎣 New Fishing Permit Application
+              Fishing Permit Application
             </h2>
             
             <h3 style="background-color: #3498db; color: white; padding: 10px; margin: 20px 0 10px 0;">👤 Personal Details</h3>
@@ -70,10 +76,12 @@ export default factories.createCoreController(
             <h3 style="background-color: #8e44ad; color: white; padding: 10px; margin: 20px 0 10px 0;">🎯 Fishing Purpose Details</h3>
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
               <tr style="background-color: #f8f9fa;">
-                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Purpose for Fishing</td>
-                <td style="padding: 12px; border: 1px solid #ddd; color: ${data?.PurposeForFishing ? "#27ae60" : "#e74c3c"}; font-weight: bold;">
-                  ${data?.PurposeForFishing ? "✅ Yes" : "❌ No"}
+                <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Purpose for Hui</td>
+                <td colspan="3" style="padding: 12px; border: 1px solid #ddd; white-space: pre-wrap;">
+                  ${data?.PurposeForHui || "Not provided"}
                 </td>
+              </tr>
+              <tr>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Number Attending</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.NumberAttending || "Not provided"}</td>
               </tr>
@@ -209,10 +217,10 @@ export default factories.createCoreController(
         });
 
         console.log("✅ Fishing permit notification email sent successfully");
-      } catch (error) {
+      } catch (emailError) {
         console.error(
           "❌ Failed to send fishing permit notification email:",
-          error
+          emailError
         );
         // Don't throw error - we don't want to break the form submission
       }

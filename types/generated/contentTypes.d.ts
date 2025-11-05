@@ -572,7 +572,7 @@ export interface ApiFishingPermitApplicationFishingPermitApplication
     NumberAttending: Schema.Attribute.String;
     PhoneNumber: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    PurposeForFishing: Schema.Attribute.Boolean;
+    PurposeForHui: Schema.Attribute.Text;
     Species: Schema.Attribute.Component<'shared.species', true>;
     StreetAddress: Schema.Attribute.Text;
     TimeOfHarvest: Schema.Attribute.DateTime;

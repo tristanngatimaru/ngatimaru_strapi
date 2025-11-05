@@ -32,8 +32,8 @@
     "StreetAddress": {
       "type": "text"
     },
-    "PurposeForFishing": {
-      "type": "boolean"
+    "PurposeForHui": {
+      "type": "text"
     },
     "NumberAttending": {
       "type": "string"
