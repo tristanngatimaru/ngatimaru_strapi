@@ -47,6 +47,14 @@
     "VenueContactNumber": {
       "type": "string"
     },
+    "TimeOfHarvest": {
+      "type": "datetime"
+    },
+    "Harvesters": {
+      "type": "component",
+      "component": "layout.harvester-names",
+      "repeatable": true
+    },
     "Species": {
       "type": "component",
       "component": "shared.species",

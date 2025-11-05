@@ -33,6 +33,17 @@ export interface LayoutFooterColumn extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutHarvesterNames extends Struct.ComponentSchema {
+  collectionName: 'components_layout_harvester_names';
+  info: {
+    displayName: 'HarvesterNames';
+  };
+  attributes: {
+    FirstName: Schema.Attribute.String;
+    LastName: Schema.Attribute.String;
+  };
+}
+
 export interface LayoutHeader extends Struct.ComponentSchema {
   collectionName: 'components_layout_headers';
   info: {
@@ -146,9 +157,10 @@ export interface SharedSpecies extends Struct.ComponentSchema {
   attributes: {
     AreaLanded: Schema.Attribute.Text;
     AreaTaken: Schema.Attribute.Text;
-    HarvestMethod: Schema.Attribute.Text;
+    HarvestMethodDrop: Schema.Attribute.Enumeration<
+      ['Rod and Line', 'Hand Harvest', 'Tanks']
+    >;
     SpeciesName: Schema.Attribute.String;
-    TimeOfHarves: Schema.Attribute.DateTime;
   };
 }
 
@@ -177,6 +189,7 @@ declare module '@strapi/strapi' {
       'layout.button': LayoutButton;
       'layout.content': LayoutContent;
       'layout.footer-column': LayoutFooterColumn;
+      'layout.harvester-names': LayoutHarvesterNames;
       'layout.header': LayoutHeader;
       'layout.header-section': LayoutHeaderSection;
       'layout.mihi-section': LayoutMihiSection;

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-08-25T23:33:38.949Z"
+    "x-generation-date": "2025-11-05T20:48:33.885Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -10551,6 +10551,16 @@
               "VenueContactNumber": {
                 "type": "string"
               },
+              "TimeOfHarvest": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "Harvesters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/LayoutHarvesterNamesComponent"
+                }
+              },
               "Species": {
                 "type": "array",
                 "items": {
@@ -10659,6 +10669,16 @@
           },
           "VenueContactNumber": {
             "type": "string"
+          },
+          "TimeOfHarvest": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Harvesters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LayoutHarvesterNamesComponent"
+            }
           },
           "Species": {
             "type": "array",
@@ -11004,6 +11024,16 @@
                 "VenueContactNumber": {
                   "type": "string"
                 },
+                "TimeOfHarvest": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "Harvesters": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LayoutHarvesterNamesComponent"
+                  }
+                },
                 "Species": {
                   "type": "array",
                   "items": {
@@ -11077,6 +11107,20 @@
           }
         }
       },
+      "LayoutHarvesterNamesComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "FirstName": {
+            "type": "string"
+          },
+          "LastName": {
+            "type": "string"
+          }
+        }
+      },
       "SharedSpeciesComponent": {
         "type": "object",
         "properties": {
@@ -11086,18 +11130,19 @@
           "SpeciesName": {
             "type": "string"
           },
-          "HarvestMethod": {
-            "type": "string"
+          "HarvestMethodDrop": {
+            "type": "string",
+            "enum": [
+              "Rod and Line",
+              "Hand Harvest",
+              "Tanks"
+            ]
           },
           "AreaTaken": {
             "type": "string"
           },
           "AreaLanded": {
             "type": "string"
-          },
-          "TimeOfHarves": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },

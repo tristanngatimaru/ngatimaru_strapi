@@ -8,17 +8,19 @@
     "SpeciesName": {
       "type": "string"
     },
-    "HarvestMethod": {
-      "type": "text"
+    "HarvestMethodDrop": {
+      "type": "enumeration",
+      "enum": [
+        "Rod and Line",
+        "Hand Harvest",
+        "Tanks"
+      ]
     },
     "AreaTaken": {
       "type": "text"
     },
     "AreaLanded": {
       "type": "text"
-    },
-    "TimeOfHarves": {
-      "type": "datetime"
     }
   },
   "config": {}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_layout_harvester_names",
+  "info": {
+    "displayName": "HarvesterNames"
+  },
+  "options": {},
+  "attributes": {
+    "FirstName": {
+      "type": "string"
+    },
+    "LastName": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
