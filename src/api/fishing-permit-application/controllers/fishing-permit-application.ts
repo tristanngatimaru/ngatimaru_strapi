@@ -161,10 +161,7 @@ export default factories.createCoreController(
                       <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Amount Requested</td>
                       <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold; color: #e67e22;">${species?.AmountRequested || "Not provided"}</td>
                       <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold; background-color: #fff3cd; color: #856404;">Amount Approved</td>
-                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; background-color: #fff3cd; min-height: 40px;">
-                        <div style="border: 1px solid #ccc; min-height: 30px; padding: 5px; background-color: #fff;">
-                          &nbsp;
-                        </div>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%; background-color: #fff; min-height: 40px;">
                       </td>
                     </tr>
                   </table>
