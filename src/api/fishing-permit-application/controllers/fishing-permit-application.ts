@@ -85,9 +85,44 @@ export default factories.createCoreController(
               </tr>
               <tr style="background-color: #f8f9fa;">
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Venue Contact Number</td>
-                <td colspan="3" style="padding: 12px; border: 1px solid #ddd;">${data?.VenueContactNumber || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.VenueContactNumber || "Not provided"}</td>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Time of Harvest</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.TimeOfHarvest ? new Date(data.TimeOfHarvest).toLocaleString() : "Not provided"}</td>
               </tr>
             </table>
+            
+            <h3 style="background-color: #17a2b8; color: white; padding: 10px; margin: 20px 0 10px 0;">👥 Harvesters</h3>
+            ${
+              data?.Harvesters &&
+              Array.isArray(data.Harvesters) &&
+              data.Harvesters.length > 0
+                ? data.Harvesters.map(
+                    (harvester: any, index: number) => `
+                  <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; border: 2px solid #17a2b8;">
+                    <tr style="background-color: #d1ecf1;">
+                      <td colspan="2" style="text-align: center; padding: 12px; font-weight: bold; font-size: 16px;">
+                        👤 Harvester ${index + 1}
+                      </td>
+                    </tr>
+                    <tr style="background-color: #f8f9fa;">
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 50%; font-weight: bold;">First Name</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 50%;">${harvester?.FirstName || "Not provided"}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Last Name</td>
+                      <td style="padding: 12px; border: 1px solid #ddd;">${harvester?.LastName || "Not provided"}</td>
+                    </tr>
+                  </table>
+                  `
+                  ).join("")
+                : `<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
+                    <tr style="background-color: #f8d7da; color: #721c24;">
+                      <td style="padding: 15px; text-align: center; font-weight: bold;">
+                        ⚠️ No harvester information provided in this application
+                      </td>
+                    </tr>
+                  </table>`
+            }
             
             <h3 style="background-color: #27ae60; color: white; padding: 10px; margin: 20px 0 10px 0;">🐟 Species Information</h3>
             ${
@@ -106,17 +141,13 @@ export default factories.createCoreController(
                       <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Species Name</td>
                       <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${species?.SpeciesName || "Not provided"}</td>
                       <td style="padding: 12px; border: 1px solid #ddd; width: 25%; font-weight: bold;">Harvest Method</td>
-                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${species?.HarvestMethod || "Not provided"}</td>
+                      <td style="padding: 12px; border: 1px solid #ddd; width: 25%;">${species?.HarvestMethodDrop || "Not provided"}</td>
                     </tr>
                     <tr>
                       <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Area Taken</td>
                       <td style="padding: 12px; border: 1px solid #ddd;">${species?.AreaTaken || "Not provided"}</td>
                       <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Area Landed</td>
                       <td style="padding: 12px; border: 1px solid #ddd;">${species?.AreaLanded || "Not provided"}</td>
-                    </tr>
-                    <tr style="background-color: #f8f9fa;">
-                      <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Time of Harvest</td>
-                      <td colspan="3" style="padding: 12px; border: 1px solid #ddd;">${species?.TimeOfHarves ? new Date(species.TimeOfHarves).toLocaleString() : "Not provided"}</td>
                     </tr>
                   </table>
                   `
