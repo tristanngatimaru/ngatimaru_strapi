@@ -12,8 +12,12 @@
       "type": "enumeration",
       "enum": [
         "Rod and Line",
-        "Hand Harvest",
-        "Tanks"
+        "Net",
+        "Trap/Pot",
+        "Spear",
+        "Hand Collection",
+        "Dive",
+        "Other"
       ]
     },
     "AreaTaken": {

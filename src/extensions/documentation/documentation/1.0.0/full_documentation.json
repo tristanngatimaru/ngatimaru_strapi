@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-11-05T20:48:33.885Z"
+    "x-generation-date": "2025-11-05T20:58:41.095Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -11134,8 +11134,12 @@
             "type": "string",
             "enum": [
               "Rod and Line",
-              "Hand Harvest",
-              "Tanks"
+              "Net",
+              "Trap/Pot",
+              "Spear",
+              "Hand Collection",
+              "Dive",
+              "Other"
             ]
           },
           "AreaTaken": {

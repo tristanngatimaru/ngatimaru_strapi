@@ -158,7 +158,15 @@ export interface SharedSpecies extends Struct.ComponentSchema {
     AreaLanded: Schema.Attribute.Text;
     AreaTaken: Schema.Attribute.Text;
     HarvestMethodDrop: Schema.Attribute.Enumeration<
-      ['Rod and Line', 'Hand Harvest', 'Tanks']
+      [
+        'Rod and Line',
+        'Net',
+        'Trap/Pot',
+        'Spear',
+        'Hand Collection',
+        'Dive',
+        'Other',
+      ]
     >;
     SpeciesName: Schema.Attribute.String;
   };
