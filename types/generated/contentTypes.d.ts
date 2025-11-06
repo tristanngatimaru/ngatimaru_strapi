@@ -570,6 +570,7 @@ export interface ApiFishingPermitApplicationFishingPermitApplication
     > &
       Schema.Attribute.Private;
     NumberAttending: Schema.Attribute.String;
+    PermitPickupTime: Schema.Attribute.DateTime;
     PhoneNumber: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     PurposeForHui: Schema.Attribute.Text;

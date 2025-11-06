@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-11-05T22:55:01.945Z"
+    "x-generation-date": "2025-11-06T00:54:19.521Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -10555,6 +10555,10 @@
                 "type": "string",
                 "format": "date-time"
               },
+              "PermitPickupTime": {
+                "type": "string",
+                "format": "date-time"
+              },
               "Harvesters": {
                 "type": "array",
                 "items": {
@@ -10671,6 +10675,10 @@
             "type": "string"
           },
           "TimeOfHarvest": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "PermitPickupTime": {
             "type": "string",
             "format": "date-time"
           },
@@ -11025,6 +11033,10 @@
                   "type": "string"
                 },
                 "TimeOfHarvest": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "PermitPickupTime": {
                   "type": "string",
                   "format": "date-time"
                 },

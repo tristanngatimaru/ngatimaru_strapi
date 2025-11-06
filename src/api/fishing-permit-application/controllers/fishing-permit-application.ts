@@ -97,6 +97,10 @@ export default factories.createCoreController(
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Time of Harvest</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.TimeOfHarvest ? new Date(data.TimeOfHarvest).toLocaleString() : "Not provided"}</td>
               </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Permit Collection Time</td>
+                <td colspan="3" style="padding: 12px; border: 1px solid #ddd;">${data?.PermitPickupTime ? new Date(data.PermitPickupTime).toLocaleString() : "Not provided"}</td>
+              </tr>
             </table>
             
             <h3 style="background-color: #17a2b8; color: white; padding: 10px; margin: 20px 0 10px 0;">👥 Harvesters</h3>

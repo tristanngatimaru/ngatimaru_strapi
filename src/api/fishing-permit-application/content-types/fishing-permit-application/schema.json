@@ -50,6 +50,9 @@
     "TimeOfHarvest": {
       "type": "datetime"
     },
+    "PermitPickupTime": {
+      "type": "datetime"
+    },
     "Harvesters": {
       "type": "component",
       "component": "layout.harvester-names",
