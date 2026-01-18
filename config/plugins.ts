@@ -4,7 +4,7 @@ module.exports = {
   },
   email: {
     config: {
-      provider: 'nodemailer',
+      provider: "nodemailer",
       providerOptions: {
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
