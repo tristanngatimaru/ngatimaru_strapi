@@ -31,7 +31,7 @@ export default factories.createCoreController(
 
         // Use the custom email service
         await sendEmail({
-          to: "tristanngatimaru@gmail.com", // Send to admin
+          to: process.env.ADMIN_EMAIL || "tristanngatimaru@gmail.com", // Send to admin
           subject: "Fishing Permit Application",
           html: `
           <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
