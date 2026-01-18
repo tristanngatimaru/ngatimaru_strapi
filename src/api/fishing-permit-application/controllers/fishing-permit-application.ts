@@ -3,7 +3,6 @@
  */
 
 import { factories } from "@strapi/strapi";
-import { sendEmail } from "../../../services/email";
 
 export default factories.createCoreController(
   "api::fishing-permit-application.fishing-permit-application",
@@ -29,10 +28,10 @@ export default factories.createCoreController(
         // Send notification email after successful creation
         const data = result as any;
 
-        // Use the custom email service
-        await sendEmail({
+        // Use Strapi's email plugin
+        await strapi.plugins["email"].services.email.send({
           to: process.env.ADMIN_EMAIL || "tristanngatimaru@gmail.com", // Send to admin
-          subject: "Fishing Permit Application",
+          subject: "🎣 New Fishing Permit Application",
           html: `
           <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
             <h2 style="text-align: center; color: #2c3e50; border-bottom: 3px solid #f39c12; padding-bottom: 10px;">
