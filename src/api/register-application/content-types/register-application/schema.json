@@ -60,28 +60,7 @@
       "type": "email"
     },
     "PrincipleHapu": {
-      "type": "enumeration",
-      "enum": [
-        "Te Ahumua",
-        "Ngati Te Aute",
-        "Ngati Kuriuaua",
-        "Te uringahau",
-        "Ngati Rautao",
-        "Ngati Hikairo",
-        "Ngati Wawenga",
-        "Ngati Kotinga",
-        "Ngati Whanga",
-        "Ngati Pu",
-        "Ngati Hauauru",
-        "Ngati Ua",
-        "Ngati Naunau",
-        "Ngati Pakira",
-        "Ngati Hape",
-        "Ngati Tumoana",
-        "Ngati Matau",
-        "Te Matahau",
-        "Ngati Tahae"
-      ]
+      "type": "string"
     },
     "PrincipleOtherIwiAffiliation": {
       "type": "string"
