@@ -78,13 +78,7 @@
       "type": "string"
     },
     "DecendantAffiliation": {
-      "type": "enumeration",
-      "enum": [
-        "Ngati Maru Descendant",
-        "Whanga of Ngati Maru Descendant",
-        "Partner of Ngati Maru Descendant",
-        "Descendant of the whangai of Ngati Maru Descendant"
-      ]
+      "type": "string"
     },
     "FatherGreatGrandFatherMen": {
       "type": "string"
