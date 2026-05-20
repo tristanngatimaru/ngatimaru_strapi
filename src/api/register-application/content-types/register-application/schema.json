@@ -13,22 +13,11 @@
   "attributes": {
     "PersonalSalutaion": {
       "type": "enumeration",
-      "enum": [
-        "Master",
-        "Mr",
-        "Miss",
-        "Mrs",
-        "Ms",
-        "Mx"
-      ]
+      "enum": ["Master", "Mr", "Miss", "Mrs", "Ms", "Mx"]
     },
     "PersonalGender": {
       "type": "enumeration",
-      "enum": [
-        "Male",
-        "Female",
-        "Gender Diverse"
-      ]
+      "enum": ["Male", "Female", "Gender Diverse"]
     },
     "PersonalBirthDate": {
       "type": "date"
@@ -101,28 +90,7 @@
       "type": "string"
     },
     "OtherHapu": {
-      "type": "enumeration",
-      "enum": [
-        "Te Ahumua",
-        "Ngati Te Aute",
-        "Ngati Kuriuaua",
-        "Te uringahau",
-        "Ngati Rautao",
-        "Ngati Hikairo",
-        "Ngati Wawenga",
-        "Ngati Kotinga",
-        "Ngati Whanga",
-        "Ngati Pu",
-        "Ngati Hauauru",
-        "Ngati Ua",
-        "Ngati Naunau",
-        "Ngati Pakira",
-        "Ngati Hape",
-        "Ngati Tumoana",
-        "Ngati Matau",
-        "Te Matahau",
-        "Ngati Tahae"
-      ]
+      "type": "text"
     },
     "OtherIwiAffiliation": {
       "type": "string"

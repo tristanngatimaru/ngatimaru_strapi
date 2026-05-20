@@ -18,7 +18,7 @@ export default factories.createCoreController(
         {
           data: ctx.request.body.data,
           populate: "*",
-        }
+        },
       );
 
       // Send notification email after successful creation
@@ -112,26 +112,26 @@ export default factories.createCoreController(
                 <td style="padding: 12px; border: 1px solid #ddd; width: 50%;">${data?.PrincipleHapu || "Not provided"}</td>
               </tr>
               <tr>
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Principal Other Iwi Affiliation</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PrincipleOtherIwiAffiliation || "Not provided"}</td>
-              </tr>
-              <tr style="background-color: #f8f9fa;">
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Principal Marae</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.PrincipleMarae || "Not provided"}</td>
+              </tr>
+              <tr style="background-color: #f8f9fa;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Principal Other Iwi Affiliation</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${data?.PrincipleOtherIwiAffiliation || "Not provided"}</td>
               </tr>
               <tr>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Other Hapū</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.OtherHapu || "Not provided"}</td>
               </tr>
-              <tr style="background-color: #f8f9fa;">
+              <tr>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Other Iwi Affiliation</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.OtherIwiAffiliation || "Not provided"}</td>
               </tr>
-              <tr>
+              <tr style="background-color: #f8f9fa;">
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Other Marae</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.OtherMarae || "Not provided"}</td>
               </tr>
-              <tr style="background-color: #f8f9fa;">
+              <tr>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Descendant Affiliation</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${data?.DecendantAffiliation || "Not provided"}</td>
               </tr>
@@ -352,12 +352,12 @@ export default factories.createCoreController(
       } catch (error) {
         console.error(
           "❌ Failed to send registration notification email:",
-          error
+          error,
         );
         // Don't throw error - we don't want to break the form submission
       }
 
       return response;
     },
-  })
+  }),
 );
